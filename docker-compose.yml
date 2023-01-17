@@ -19,8 +19,13 @@
         image: mariadb
         container_name: DocWeboxDB
         restart: always
-        volumes:
-            - "./db:/var/lib/mysql"
         environment:
             MARIADB_ROOT_PASSWORD: 'changethispassword'
+
+    adminer:
+        image: adminer
+        container_name: DocWeboxAdminer
+        restart: always
+        ports:
+            - 8080:8080
 
