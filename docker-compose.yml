@@ -8,7 +8,7 @@
             - DB_HOST=db
             - DB_NAME=DocWeboxDB
             - DB_USERNAME=root
-            - DB_PASSWORD=changethispassword
+            - DB_PASSWORD=password
         ports:
             - '80:80'
         depends_on:
@@ -18,14 +18,12 @@
     db:
         image: mariadb
         container_name: DocWeboxDB
-        restart: always
         environment:
-            MARIADB_ROOT_PASSWORD: 'changethispassword'
+            MARIADB_ROOT_PASSWORD: 'password'
 
     adminer:
         image: adminer
         container_name: DocWeboxAdminer
-        restart: always
         ports:
             - 8080:8080
 
