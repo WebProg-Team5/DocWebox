@@ -21,6 +21,12 @@ CREATE TABLE `admins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 TRUNCATE `admins`;
+INSERT INTO `admins` (`id`, `username`, `password`) VALUES
+(1,	'tguillon0',	'n8yaBX7wDldN'),
+(2,	'ljanz1',	'9AF7467uMY'),
+(3,	'gmariolle2',	'UxHvmrXC'),
+(4,	'gcolombier3',	'wqsasTKJ6'),
+(5,	'cdripp4',	'lwis4G');
 
 DROP TABLE IF EXISTS `appointments`;
 CREATE TABLE `appointments` (
@@ -543,4 +549,4 @@ INSERT INTO `reviews` (`id`, `date`, `content`, `rating`, `patientID`, `doctorID
 (99,	'2022-01-19 04:52:05',	'tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis in faucibus',	6,	44,	34),
 (100,	'2022-05-30 04:15:09',	'magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis dui',	1,	51,	48);
 
--- 2023-01-17 20:45:18
+-- 2023-01-17 20:48:31
