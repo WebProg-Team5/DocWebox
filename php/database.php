@@ -80,4 +80,23 @@ function createSchema($pdo) {
     $pdo->query($sql);
 }
 
+function hashPasswords($pdo) {
+    $sql = "
+        select id, password, 'patients' as type from patients
+        UNION ALL
+        select id, password, 'doctors' as type from doctors
+        UNION ALL
+        select id, password, 'admins' as type from admins;
+        ";
+
+    $data = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    if ($data) {
+        foreach ($data as $entry) {
+            $hashedPassword = password_hash($entry['password'], PASSWORD_DEFAULT);
+            $pdo->query("UPDATE {$entry['type']} SET password = '{$hashedPassword}' WHERE id = {$entry['id']}");
+        }
+    }
+
+}
+
 ?>
