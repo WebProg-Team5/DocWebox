@@ -1,11 +1,12 @@
 <?php
-
     require_once 'connect.php';
     session_start();
-    $error="";
+    $error=""; //Variable to contain error message
 
     //Check if the form is submited
     if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+        //Sanitize the form data
         $username = mysqli_real_escape_string($conn, $_POST['username']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
 
@@ -18,8 +19,9 @@
         $user = $result->fetch_assoc(); 
 
         if ($user) {
+
             // Account exists, now we verify the password.
-            // Note: remember to use password_hash in your registration file to store the hashed passwords.
+            // !!!Note: remember to use password_hash in your registration file to store the hashed passwords.
             if (password_verify($password, $user['password'])) { 
                 // Verification success! User has logged-in!
                 // Create sessions

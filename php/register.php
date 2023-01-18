@@ -1,11 +1,12 @@
 <?php
   session_start();
   include 'connect.php';
-  $errors=[];
+  $errors=[]; //Array to contain error messages
 
+  //Check if the form is submited
   if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // process the form
 
+    //Sanitize the form data
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
@@ -17,13 +18,15 @@
     }
 
     //Check if the user already exists 
+    // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
     if ($stmt = $conn->prepare('SELECT username, email FROM patients WHERE username = ? OR email= ?')) {
       $stmt->bind_param('ss', $username, $email);
       $stmt->execute();
       $result = $stmt -> get_result();
       $user = $result->fetch_assoc(); 
 
-      if ($user) { // if user exists
+      if ($user) { 
+        //User exists and we check both username and password
         if ($user['username'] === $username) {
           array_push($errors, "Username already exists!");
         }
@@ -42,10 +45,12 @@
         $stmt->bind_param("sss",$username, $password, $email);
         $stmt->execute();
 
+        //Set the Session Variables
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
         $_SESSION['email'] = $email;
         $_SESSION['loggedIn'] = TRUE;
+        
         header('location: index.php');
       }
       $stmt->close();
@@ -115,5 +120,24 @@
       </div>
     </div>
   </div>
+
+  <!--=======================Javascript============================-->
+  <!--=== Modernizr Min Js ===-->
+  <script src="assets/js/modernizr.js"></script>
+  <!--=== jQuery Min Js ===-->
+  <script src="assets/js/jquery-main.js"></script>
+  <!--=== jQuery Migration Min Js ===-->
+  <script src="assets/js/jquery-migrate.js"></script>
+  <!--=== Popper Min Js ===-->
+  <script src="assets/js/popper.min.js"></script>
+  <!--=== Bootstrap Min Js ===-->
+  <script src="assets/js/bootstrap.min.js"></script>
+  <!--=== jquery UI Min Js ===-->
+  <script src="assets/js/jquery-ui.min.js"></script>
+  <!--=== Plugin Collection Js ===-->
+  <script src="assets/js/plugincollection.js"></script>
+  <!--=== Custom Js ===-->
+  <script src="assets/js/custom.js"></script>
+
 </body>
 </html>
