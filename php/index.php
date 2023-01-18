@@ -1,3 +1,18 @@
+<?php
+  require_once "connect.php";
+  session_start();
+
+  if(!isset($_SESSION['loggedIn'])){
+    header('Location: login.php');
+  }
+
+  // echo "<br><br><br><br><br><br><br>" .$_SESSION['username'] . "<br>" . 
+  //   $_SESSION['password']. "<br>" . 
+  //   $_SESSION['email'] . "<br>" . 
+  //   $_SESSION['loggedIn'] . "<br><br><br>";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +52,7 @@
               </div>
               <div class="header-action-area">
                 <div class="login-reg">
-                  <a href="login.php">log in</a><span>/</span><a href="register.php">register</a> <i class="icon icofont-user-alt-3"></i>
+                  <a href=""><?php echo $_SESSION['username']?></a><span>/</span><a href="logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
                 </div>
                 <button class="btn-menu d-lg-none">
                   <span></span>
