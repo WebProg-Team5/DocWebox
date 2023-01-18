@@ -1,8 +1,8 @@
 <?php
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'DocWeboxDB');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
+define('DB_HOST', isset($_ENV["DB_HOST"]) ? $_ENV["DB_HOST"] : 'localhost');
+define('DB_NAME', isset($_ENV["DB_NAME"]) ? $_ENV["DB_NAME"] : 'DocWeboxDB');
+define('DB_USERNAME', isset($_ENV["DB_USERNAME"]) ? $_ENV["DB_USERNAME"] : 'root');
+define('DB_PASSWORD', isset($_ENV["DB_PASSWORD"]) ? $_ENV["DB_PASSWORD"] : '');
  
 /* Attempt to connect to MySQL database */
 try{
