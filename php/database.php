@@ -53,7 +53,8 @@ function createSchema($pdo) {
       CREATE TABLE IF NOT EXISTS admins (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         username VARCHAR(50) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL
+        password VARCHAR(255) NOT NULL,
+        email VARCHAR(255)
       );
 
       CREATE TABLE IF NOT EXISTS appointments (
@@ -76,6 +77,13 @@ function createSchema($pdo) {
         FOREIGN KEY (patientID) REFERENCES patients(id),
         FOREIGN KEY (doctorID) REFERENCES doctors(id)
       );
+
+      CREATE VIEW users AS
+        SELECT id, username, email, password, 'patient' AS type FROM patients
+        UNION ALL
+        SELECT id, username, email, password, 'doctor' AS type FROM doctors
+        UNION ALL
+        SELECT id, username, email, password, 'admin' AS type FROM admins;
       ";
     $pdo->query($sql);
 }
