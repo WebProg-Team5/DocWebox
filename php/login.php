@@ -12,8 +12,15 @@
 
         // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
         //!!! CHANGE THE SQL STATEMENT FOR MULTIPLE TABLES
-    if ($stmt = $conn->prepare('SELECT id, username ,password FROM patients WHERE username = ? OR email = ?')) {
-        $stmt->bind_param('ss', $username,$username);
+        // $sql = 
+        // "select id, username ,password, 'patients' as type from patients where username = ? OR email = ? UNION ALL;
+        // select id, username ,password, 'doctors' as type from doctors where username = ? OR email = ? UNION ALL;
+        // select id, username ,password, 'admins' as type from admins where where username = ? OR email = ?";
+
+        $sql = 'SELECT * , "patient" as type FROM patients WHERE username = ? OR email = ?';
+
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param('ss', $username, $username);
         $stmt->execute();
         $result = $stmt -> get_result();
         $user = $result->fetch_assoc(); 
@@ -29,6 +36,7 @@
                 $_SESSION['loggedIn'] = TRUE;
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['id'] = $user['id'];
+                $_SESSION['type']= $user['type'];
 
                 //Check if the remember checkbox is checked and set a cookie for username and password for 30 days
                 if(!empty($_POST["rememberPwd"])) {

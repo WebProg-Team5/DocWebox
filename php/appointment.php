@@ -1,61 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php 
+    require_once "connect.php";
+    session_start();
+?>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Appointment</title>
-    <meta name="description" content="Book Your Appointment"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets\img\icons\favicon-16x16.png">
-  
-    <!--== Main Style CSS ==-->
-    <link href="assets/css/style.css" rel="stylesheet" />
-
-</head>
+<!-- Head Element -->
+<?php include 'commonsPhp/head.php'?>
 
 <body>
 
 <!--wrapper start-->
 <div class="wrapper">
 
-<!--== Start Header Wrapper ==-->
-<header class="header-area header-default transparent sticky-header">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-12">
-        <div class="header-align">
-          <div class="header-logo-area">
-            <a href="index.html">
-              <img class="logo-light" src="assets\img\brand-logo\docwebox-high-resolution-logo-color-on-transparent-background.png" alt="Logo" />
-            </a>
-          </div>
-          <div class="header-navigation-area">
-            <ul class="main-menu nav justify-content-center">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="contact.html">Contact</a></li>
-              <li class="active"><a href="appointment.html">Appointment</a></li>
-            </ul>
-          </div>
-          <div class="header-action-area">
-            <div class="login-reg">
-              <a href="login.php">log in</a><span>/</span><a href="register.php">register</a> <i class="icon icofont-user-alt-3"></i>
-            </div>
-            <button class="btn-menu d-lg-none">
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-<!--== End Header Wrapper ==-->
+  <!--== Start Header Wrapper ==-->
+  <?php include 'commonsPhp/navigation.php'?>
+  <!--== End Header Wrapper ==-->
 
   <main class="main-content site-wrapper">
   <!--== Start Hero Area Wrapper ==-->
@@ -161,78 +119,13 @@
 
   </main>
 
-  <!--== Start Footer Area Wrapper ==-->
-  <footer class="footer-area">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 m-auto">
-          <div class="widget-item">
-            <div class="about-widget">
-              <a class="footer-logo" href="index.html">
-                <img src="assets\img\brand-logo\docwebox(160x100).png" alt="Logo">
-              </a>
-              <p class="mb-0">Sed elit quam, iaculis sed semper sit amet udin vitae nibh at magna akal semperFusce.
-              </p>
-              <ul class="widget-contact-info">
-                <li class="info-address"><i class="icofont-location-pin"></i>69 Halsey St, New York, Ny 10002, United
-                  States.</li>
-                <li class="info-mail"><i class="icofont-email"></i><a
-                    href="mailto://DocWebox@yourdomain.com">DocWebox@yourdomain.com</a></li>
-                <li class="info-phone"><i class="icofont-ui-call"></i><a href="tel://(0091) 8547 632521">(0091) 8547
-                    632521</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="row text-center">
-          <div class="col-sm-12">
-            <div class="widget-copyright">
-              <p>© 2021 <span>DocWebox</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!--== End Footer Area Wrapper ==-->
-  
-  <!--== Scroll Top Button ==-->
-  <div class="scroll-to-top"><span class="icofont-rounded-up"></span></div>
+<!--== Start Footer Area Wrapper ==-->
+<?php include 'commonsPhp/footer.php'?>
+<!--== End Footer Area Wrapper ==-->
 
-  <!--== Start Side Menu ==-->
-  <aside class="off-canvas-wrapper">
-    <div class="off-canvas-inner">
-      <div class="off-canvas-overlay"></div>
-      <!-- Start Off Canvas Content Wrapper -->
-      <div class="off-canvas-content">
-        <!-- Off Canvas Header -->
-        <div class="off-canvas-header">
-          <div class="logo-area">
-            <a href="index.html"><img src="assets/img/logo.png" alt="Logo" /></a>
-          </div>
-          <div class="close-action">
-            <button class="btn-close"><i class="lnr lnr-cross"></i></button>
-          </div>
-        </div>
-
-        <div class="off-canvas-item">
-          <!-- Start Mobile Menu Wrapper -->
-          <div class="res-mobile-menu">
-            <!-- Note Content Auto Generate By Jquery From Main Menu -->
-          </div>
-          <!-- End Mobile Menu Wrapper -->
-        </div>
-        <!-- Off Canvas Footer -->
-        <div class="off-canvas-footer"></div>
-      </div>
-      <!-- End Off Canvas Content Wrapper -->
-    </div>
-  </aside>
-  <!--== End Side Menu ==-->  
+<!--== Scroll Top Button / Side Menu ==-->
+<?php include 'commonsPhp/topButton_sideMenu.php'?>
+<!--== End Scroll Top Button / Side Menu ==-->  
 </div>
 
 <!--=======================Javascript============================-->
