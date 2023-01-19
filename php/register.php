@@ -47,9 +47,9 @@
 
         //Set the Session Variables
         $_SESSION['username'] = $username;
-        $_SESSION['password'] = $password;
         $_SESSION['email'] = $email;
         $_SESSION['loggedIn'] = TRUE;
+        $_SESSION['type'] = "patient";
         
         header('location: index.php');
       }

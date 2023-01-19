@@ -11,13 +11,8 @@
         $password = mysqli_real_escape_string($conn, $_POST['password']);
 
         // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-        //!!! CHANGE THE SQL STATEMENT FOR MULTIPLE TABLES
-        // $sql = 
-        // "select id, username ,password, 'patients' as type from patients where username = ? OR email = ? UNION ALL;
-        // select id, username ,password, 'doctors' as type from doctors where username = ? OR email = ? UNION ALL;
-        // select id, username ,password, 'admins' as type from admins where where username = ? OR email = ?";
-
-        $sql = 'SELECT * , "patient" as type FROM patients WHERE username = ? OR email = ?';
+        //!!! CHANGE TABLE TO USERS
+        $sql = 'SELECT * FROM users WHERE username = ? OR email = ?';
 
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param('ss', $username, $username);
@@ -28,7 +23,6 @@
         if ($user) {
 
             // Account exists, now we verify the password.
-            // !!!Note: remember to use password_hash in your registration file to store the hashed passwords.
             if (password_verify($password, $user['password'])) { 
                 // Verification success! User has logged-in!
                 // Create sessions
@@ -37,15 +31,6 @@
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['id'] = $user['id'];
                 $_SESSION['type']= $user['type'];
-
-                //Check if the remember checkbox is checked and set a cookie for username and password for 30 days
-                if(!empty($_POST["rememberPwd"])) {
-                    setcookie ("username",$username,time()+ 86400 * 30,"/");
-                    setcookie ("password",$password,time()+ 86400 * 30,"/");
-                } else {
-                    setcookie("username","");
-                    setcookie("password","");
-                }
 
                 header("Location: index.php");
 
@@ -91,18 +76,13 @@
                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                         <div class="form-label-group">
                             <label for="inputEmail">Username</label>
-                            <input type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus name="username" 
-                            value="<?php if(isset($_COOKIE["username"])) { echo $_COOKIE["username"]; } ?>" >
+                            <input type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus name="username">
                         </div>
                         <div class="form-label-group">
                             <label for="inputPassword">Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password"
-                            value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>">
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password">
                         </div>
                         <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" name="rememberPwd" class="custom-control-input" id="rememberPwd">
-                            <label class="custom-control-label" for="rememberPwd">Remember password</label>
-                        </div>
                         <button class="btn btn-lg btn-primary btn-block textoff" type="submit" value="submit" name="submit">Sign in</button>
                         </form>
                         <?php echo"<b class='text-danger'>$error</b>"?>
