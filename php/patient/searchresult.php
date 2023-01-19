@@ -4,14 +4,21 @@ $return = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    $name_Spec = mysqli_real_escape_string($conn, $_POST["name_Spec"]);
+    $name = mysqli_real_escape_string($conn, $_POST["name"]);
     $location = mysqli_real_escape_string($conn, $_POST["location"]);
     $insurance = mysqli_real_escape_string($conn, $_POST["insurance"]);
+    $specialisation = mysqli_real_escape_string($conn, $_POST["specialisation"]);
+
+    var_dump($name, $location, $insurance, $specialisation);
 
     $query = "SELECT * FROM doctors WHERE 1=1";
    
-    if(!empty($name_Spec)){
-        $query .= " AND (name LIKE '%$name_Spec%' OR specialisation LIKE '%$name_Spec%')";
+    if(!empty($name)){
+        $query .= " AND name LIKE '%$name%'";
+    }
+
+    if(!empty($specialisation && $specialisation != "Specialisation")){
+        $query .= " AND specialisation LIKE '%$specialisation%'";
     }
 
     if(!empty($location) && $location != "Location"){
@@ -21,6 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     if(!empty($insurance && $insurance != "Insurance")){
         $query .= " AND insurance LIKE '%$insurance%' ";
     }
+
 
     //Execute the query
     $stmt = $conn->prepare($query);
@@ -35,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         <tr>
             <th></th>
             <th>Name</th>
-            <th>Specialiasation</th>
+            <th>Specialisation</th>
             <th>Location</th>
             <th>Insurance</th>
         </tr>';

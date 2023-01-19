@@ -13,18 +13,11 @@
       $available_locations = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    // //!!! fetch name and specializations on load ISOS TO KANW 
-    // $query = "SELECT DISTINCT name from doctors";
-    // $result = $conn->query($query);
-    // if($result->num_rows> 0){
-    //   $available_Doctors = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    // }
-
-    // $query = "SELECT DISTINCT specialisation from doctors";
-    // $result = $conn->query($query);
-    // if($result->num_rows> 0){
-    //   $available_Specs = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    // }
+    $query = "SELECT DISTINCT specialisation from doctors";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+      $available_Specs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
 ?>
 
 <html>
@@ -48,25 +41,37 @@
 		<h2 class="text-primary m-4">Find the best Doctors for your needs</h2>
         <img src="../assets\img\brand-logo\docwebox(160x100).png" alt="DocWeboxLogo">
 		<div class="row mt-3">
-            <div class="col-sm-12 col-lg-5 col-xl-5 mx-auto form-inline">
-                <div class="mt-4">
-                    <input type="text" name="name_Spec" id="name_Spec" placeholder="Name or Specialization" class="form-control" />
-                    <select id="location"class="form-select btn border">
-                        <option value="" selected>Location</option>
-                        <?php 
-                            foreach ($available_locations as $loc){
-                                echo '<option class="dropdown-item" value="'.$loc['location'].'">'.$loc['location'].'</option>';
-                            }
-                        ?>
-                    </select>
-                    <select id="insurance"class="form-select btn border">
-                        <option value="" selected>Insurance</option>
-                        <?php 
-                            foreach ($available_insurances as $inc){
-                                echo '<option class="dropdown-item" value="'.$inc['insurance'].'">'.$inc['insurance'].'</option>';
-                            }
-                        ?>
-                    </select>
+            <div class="mx-auto form-inline">
+                <div class="mt-4 mx-auto">
+                    <div class="row">
+                        <input type="text" name="name" id="name" placeholder="Name" class="form-control" />
+                        <select id="specialisation"class="form-select btn border">
+                            <option value="" selected>Specialisation</option>
+                            <?php 
+                                foreach ($available_Specs as $spec){
+                                    echo '<option class="dropdown-item" value="'.$spec['specialisation'].'">'.$spec['specialisation'].'</option>';
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <select id="location"class="form-select btn border mt-3">
+                            <option value="" selected>Location</option>
+                            <?php 
+                                foreach ($available_locations as $loc){
+                                    echo '<option class="dropdown-item" value="'.$loc['location'].'">'.$loc['location'].'</option>';
+                                }
+                            ?>
+                        </select>
+                        <select id="insurance"class="form-select btn border mt-3">
+                            <option value="" selected>Insurance</option>
+                            <?php 
+                                foreach ($available_insurances as $inc){
+                                    echo '<option class="dropdown-item" value="'.$inc['insurance'].'">'.$inc['insurance'].'</option>';
+                                }
+                            ?>
+                        </select>
+                    </div>
                 </div>
             </div>	
         </div>
@@ -79,25 +84,24 @@
 </html>
 
 <script>
-    $('.bookNow').on('click', function pageRedirect() {
-        console.log("Clicked");
-        window.location.href = "../doctor/myprofile?" + $this.attr('id');
-    });
-
-    $('#name_Spec').on("keyup",
+    $('#name').on("keyup",
     function(){     
-        let name_Spec_value = $('#name_Spec').val();
-        let location_value = $('#location :selected').val();
-        let insurance_value = $('#insurance :selected').val();
+        let name_value = $('#name').val();
+        let location_value = $('#location :selected').text();
+        let insurance_value = $('#insurance :selected').text();
+        let specialisation_value = $('#specialisation :selected').text();
 
-        if(name_Spec_value != "" || location_value != "" || insurance_value != ""){
+        console.log(name_value, location_value, insurance_value,specialisation_value);
+
+        if(name_value != "" || location_value != "" || insurance_value != "" || specialisation_value != ""){
             $.ajax({
                     url:"searchresult.php",
                     method:"POST",
                     data:{
-                        name_Spec: name_Spec_value,
+                        name: name_value,
                         location: location_value,
-                        insurance: insurance_value
+                        insurance: insurance_value,
+                        specialisation: specialisation_value
                     },
                     success: function(data)
                     {
@@ -107,19 +111,23 @@
         }
     });
 
-    $("#location,#insurance").on('change', function() {
-        let name_Spec_value = $('#name_Spec').val();
+    $("#location,#insurance,#specialisation").on('change', function() {
+        let name_value = $('#name').val();
         let location_value = $('#location :selected').text();
         let insurance_value = $('#insurance :selected').text();
+        let specialisation_value = $('#specialisation :selected').text();
 
-        if(name_Spec_value != "" || location_value != "" || insurance_value != ""){
+        console.log(name_value, location_value, insurance_value,specialisation_value);
+
+        if(name_value != "" || location_value != "" || insurance_value != "" || specialisation_value != ""){
             $.ajax({
                     url:"searchresult.php",
                     method:"POST",
                     data:{
-                        name_Spec: name_Spec_value,
+                        name: name_value,
                         location: location_value,
-                        insurance: insurance_value
+                        insurance: insurance_value,
+                        specialisation: specialisation_value
                     },
                     success: function(data)
                     {
