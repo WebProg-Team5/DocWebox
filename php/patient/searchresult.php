@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     $insurance = mysqli_real_escape_string($conn, $_POST["insurance"]);
     $specialisation = mysqli_real_escape_string($conn, $_POST["specialisation"]);
 
-    var_dump($name, $location, $insurance, $specialisation);
+    // var_dump($name, $location, $insurance, $specialisation);
 
     $query = "SELECT * FROM doctors WHERE 1=1";
    
@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
     if(mysqli_num_rows($result) > 0){
         $return .='
-        <div class="table-responsive">
+        <div class="table-responsive table-sm">
         <table class="table table bordered">
         <tr>
             <th></th>
@@ -46,6 +46,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             <th>Specialisation</th>
             <th>Location</th>
             <th>Insurance</th>
+            <th></th>
         </tr>';
 
         while($row1 = mysqli_fetch_array($result))

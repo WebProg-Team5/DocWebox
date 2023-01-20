@@ -37,25 +37,34 @@
 <body>
 <div class="container-fluid">       
 <div class="content-wrapper">
-	<div class="container-fluid text-center">
-		<h2 class="text-primary m-4">Find the best Doctors for your needs</h2>
-        <img src="../assets\img\brand-logo\docwebox(160x100).png" alt="DocWeboxLogo">
-		<div class="row mt-3">
-            <div class="mx-auto form-inline">
-                <div class="mt-4 mx-auto">
-                    <div class="row">
-                        <input type="text" name="name" id="name" placeholder="Name" class="form-control" />
-                        <select id="specialisation"class="form-select btn border">
-                            <option value="" selected>Specialisation</option>
-                            <?php 
-                                foreach ($available_Specs as $spec){
-                                    echo '<option class="dropdown-item" value="'.$spec['specialisation'].'">'.$spec['specialisation'].'</option>';
-                                }
-                            ?>
-                        </select>
+	<div class="container-fluid text-center ">
+        <div class="col-sm-12 mt-4">
+            <img src="../assets\img\brand-logo\docwebox(160x100).png" alt="DocWeboxLogo">
+            <img src="../assets\img\brand-logo\docwebox(160x100).png" alt="DocWeboxLogo">
+            <h2 class="text-primary m-4">
+            Find the best Doctors for your needs
+            </h2>
+        </div>
+
+        <div class="container col-md-10 col-lg-8 mt-2 border">
+                <div class="row">
+                    <div class="form-group col-sm-12 col-md-12">
+                            <input type="text" name="name" id="name" placeholder="Doctor's Name" class="form-control text-center mt-3" />
+                        </div>
                     </div>
-                    <div class="row">
-                        <select id="location"class="form-select btn border mt-3">
+                <div class="row">
+                    <div class="form-group col-sm-12 col-md-4">
+                        <select id="specialisation"class="form-control form-select btn border mt-2">
+                                <option value="" selected>Specialisation</option>
+                                <?php 
+                                    foreach ($available_Specs as $spec){
+                                        echo '<option class="dropdown-item" value="'.$spec['specialisation'].'">'.$spec['specialisation'].'</option>';
+                                    }
+                                ?>
+                        </select>                        
+                    </div>
+                    <div class="form-group col-sm-12 col-md-4">
+                        <select id="location"class="form-control form-select btn border mt-2">
                             <option value="" selected>Location</option>
                             <?php 
                                 foreach ($available_locations as $loc){
@@ -63,7 +72,9 @@
                                 }
                             ?>
                         </select>
-                        <select id="insurance"class="form-select btn border mt-3">
+                    </div>
+                    <div class="form-group col-sm-12 col-md-4">
+                        <select id="insurance"class="form-control form-select btn border mt-2">
                             <option value="" selected>Insurance</option>
                             <?php 
                                 foreach ($available_insurances as $inc){
@@ -73,9 +84,11 @@
                         </select>
                     </div>
                 </div>
-            </div>	
+            </div>
+
         </div>
-        <div class="col-sm-12 col-md-10 mx-auto mt-4" id="result">         
+        
+        <div class="container col-sm-12 col-md-10 col-lg-8  mx-auto mt-4" id="result">         
         </div>
 	</div>
 </div>
@@ -91,7 +104,7 @@
         let insurance_value = $('#insurance :selected').text();
         let specialisation_value = $('#specialisation :selected').text();
 
-        console.log(name_value, location_value, insurance_value,specialisation_value);
+        // console.log(name_value, location_value, insurance_value,specialisation_value);
 
         if(name_value != "" || location_value != "" || insurance_value != "" || specialisation_value != ""){
             $.ajax({
@@ -117,7 +130,7 @@
         let insurance_value = $('#insurance :selected').text();
         let specialisation_value = $('#specialisation :selected').text();
 
-        console.log(name_value, location_value, insurance_value,specialisation_value);
+        // console.log(name_value, location_value, insurance_value,specialisation_value);
 
         if(name_value != "" || location_value != "" || insurance_value != "" || specialisation_value != ""){
             $.ajax({
