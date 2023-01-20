@@ -21,9 +21,16 @@
         environment:
             MARIADB_ROOT_PASSWORD: 'password'
 
-    adminer:
-        image: adminer
-        container_name: DocWeboxAdminer
+    phpmyadmin:
+        image: phpmyadmin
+        container_name: phpmyadmin
+        links:
+            - db
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            PMA_USER: root
+            PMA_PASSWORD: password
         ports:
-            - 8080:8080
+            - "8080:80"
 
