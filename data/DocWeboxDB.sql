@@ -605,8 +605,8 @@ CREATE TABLE `users` (
 --
 DROP TABLE IF EXISTS `users`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `users`  AS SELECT `patients`.`id` AS `id`, `patients`.`username` AS `username`, `patients`.`email` AS `email`, `patients`.`password` AS `password`, 'patient' AS `type` FROM `patients` union all select `doctors`.`id` AS `id`,`doctors`.`username` AS `username`,`doctors`.`email` AS `email`,`doctors`.`password` AS `password`,'doctor' AS `type` from `doctors` union all select `admins`.`id` AS `id`,`admins`.`username` AS `username`,`admins`.`email` AS `email`,`admins`.`password` AS `password`,'admin' AS `type` from `admins`  ;
-
+CREATE  VIEW `users`  AS SELECT `patients`.`id` AS `id`, `patients`.`username` AS `username`, `patients`.`email` AS `email`, `patients`.`password` AS `password`, 'patient' AS `type` FROM `patients` union all select `doctors`.`id` AS `id`,`doctors`.`username` AS `username`,`doctors`.`email` AS `email`,`doctors`.`password` AS `password`,'doctor' AS `type` from `doctors` union all select `admins`.`id` AS `id`,`admins`.`username` AS `username`,`admins`.`email` AS `email`,`admins`.`password` AS `password`,'admin' AS `type` from `admins`  ;
+-- ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER
 --
 -- Indexes for dumped tables
 --
