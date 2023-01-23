@@ -50,6 +50,7 @@
         $_SESSION['email'] = $email;
         $_SESSION['loggedIn'] = TRUE;
         $_SESSION['type'] = "patient";
+        $_SESSION['id'] = $id;
         
         header('location: index.php');
       }

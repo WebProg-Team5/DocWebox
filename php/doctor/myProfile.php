@@ -161,45 +161,6 @@ if($result->num_rows > 0){
                         }
                     ?>
                 </div>
-
-                <!-- <div class="row mt-5">
-                    Insurance: <?php echo "<h4 class='text-primary m-4'>{$doctor["insurance"]}</h4>"?>
-                    Specialisation: <?php echo "<h4 class='text-primary m-4'>{$doctor["specialisation"]}</h4>"?>
-                    Price: <?php echo "<h4 class='text-primary m-4'>\${$doctor["price"]}</h4>"?>
-                    Ratings: <?php echo "<h4 class='text-primary m-4'>{$rating} stars</h4>"?>
-                </div>
-                <?php echo "<h5 class=''>{$doctor["description"]}</h5>"?>
-                <div class="row mt-5">
-                    Email: <?php echo "<h5 class='text-primary m-4'>{$doctor["email"]}</h5>"?>
-                    Phone: <?php echo "<h5 class='text-primary m-4'>{$doctor["phone"]}</h5>"?>
-                    City: <?php echo "<h5 class='text-primary m-4'>{$doctor["location"]}</h5>"?>
-                </div> -->
-                
-                <!-- <h3>Reviews (<?php echo $reviewCount?> Found)</h3>
-                <div class="table-responsive  table-sm">
-                    <table class="table table-hover table-bordered">
-                        <tr>
-                            <th>Name</th>
-                            <th>Date</th>
-                            <th>Rating</th>
-                            <th>Content</th>
-                        </tr>
-                <?php
-                    if ($reviewCount>0) {
-                        foreach ($reviews as $key => $value) {
-                            $rating = $value['rating']/2;
-                            echo "
-                            <tr>
-                            <td>{$value['name']}</td>
-                            <td>{$value['date']}</td>
-                            <td>{$rating} stars</td>
-                            <td>{$value['content']}</td>
-                            </tr>
-                        ";
-                        }
-                    }
-                ?>
-                </div> -->
             </div>
         </div>
     </div>
