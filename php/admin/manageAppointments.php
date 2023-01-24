@@ -2,9 +2,18 @@
 session_start();
 include("../connect.php");
 
+// Appointment Confirmation
+if (isset($_POST)) {
+    $id = isset($_POST['id']) ? $_POST['id'] : null;
+    if ($id != null) {
+        $query ="UPDATE appointments SET confirmed = 1 WHERE id={$id}";
+        $conn->query($query);
+    }
+}
+
 $id = $_SESSION["id"];
 //$id = htmlspecialchars($_GET["id"]); //alternative
-$query ="SELECT d.name, a.* FROM appointments as a JOIN doctors as d ON a.doctorID=d.id WHERE patientID={$id} ORDER BY date";
+$query ="SELECT p.name as pName, d.name as dName, a.* FROM appointments as a JOIN patients as p ON a.patientID=p.id JOIN doctors d on a.doctorID = d.id ORDER BY date";
 $result = $conn->query($query);
 if($result->num_rows > 0){
     $appointments = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -37,14 +46,14 @@ if($result->num_rows > 0){
                                     <li id="home"><a href="../index.php">Home</a></li>
 
                                     <?php if ($_SESSION['type'] === 'patient'){
-                                        echo '<li id="searchDocs"><a href="searchDocs.php?id='.$_SESSION['id'].'">Search Doctors</a></li>
-                                                <li id="myAppointments"><a href="myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>';
+                                        echo '<li id="searchDocs"><a href="patient/searchDocs.php?id='.$_SESSION['id'].'">Search Doctors</a></li>
+                                                <li id="myAppointments"><a href="patient/myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>';
                                     } else if($_SESSION['type'] === 'doctor'){
                                         echo '<li id="myAppointments"><a href="myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>
                                                 <li id="myProfiel"><a href="myProfile.php?id='.$_SESSION['id'].'">My Profile</a></li>';
                                     } else if($_SESSION['type'] === 'admin'){
-                                        '<li id="mngAppointments"><a href="admin/manageAppointments.php">Manage Appointments</a></li>
-                                         <li id="mngDocs"><a href="admin/manageDoctors.php">Manage Doctors</a></li>';
+                                        echo '<li id="mngAppointments"><a href="manageAppointments.php">Manage Appointments</a></li>
+                                                <li id="mngDocs"><a href="manageDoctors.php">Manage Doctors</a></li>';
                                     }
                                     ?>
 
@@ -75,20 +84,24 @@ if($result->num_rows > 0){
                 <div class="table-responsive  table-sm mb-5">
                     <table class="table table-hover table-bordered">
                         <tr>
+                            <th>Patient Name</th>
                             <th>Doctor Name</th>
                             <th>Date</th>
                             <th>Confirmation</th>
-                            <th></th>
                         </tr>
                         <?php
                         foreach ($appointments as $value) {
-                            $confirmation = $value["confirmed"] ? "Confirmed" : "Awaiting Confirmation";
+                            $form = "<form method='post'' action='myAppointments.php'>
+                                        <input type='hidden' id='id' name='id' value={$value['id']}>
+                                        <input type='submit' class='btn btn-outline-primary' name='' value='Confirm'>
+                                     </form>";
+                            $confirmation = $value["confirmed"] ? "<button type='button' class='btn btn-outline-dark' disabled>Confirmed</button>" : $form;
                             echo "
                             <tr>
-                            <td>{$value['name']}</td>
+                            <td>{$value['pName']}</td>
+                            <td>{$value['dName']}</td>
                             <td>{$value['date']}</td>
                             <td>{$confirmation}</td>
-                            <td><a href='../doctor/myProfile.php?id={$value['doctorID']}' type='button' class='btn btn-outline-primary'>Go to Profile</a></td>
                             </tr>
                         ";
                         }
