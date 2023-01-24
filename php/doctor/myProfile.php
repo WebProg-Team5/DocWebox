@@ -207,24 +207,25 @@ if($result->num_rows > 0){
     $("#myProfile").addClass("active");
 
     $('#datetimepicker').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
         minDate: new Date()
     });
 
     $("#submit").on('click', function() {;
-        // $.ajax({
-        //     url: "../patient/closeAppointment",
-        //     method:"GET",
-        //     data:{
-        //         date: datetimepickerVal,
-        //         confirmed: 0,
-        //         doctorId : doctorIdVal,
-        //         patientId : patientIdVal
-        //     },
-        //     success: function(data)
-        //     {
-        //         $('#result').html(data);
-        //     }
-        // });
+        $.ajax({
+            url: "../patient/closeAppointment.php",
+            method:"POST",
+            data:{
+                date: datetimepickerVal.date,
+                confirmed: 0,
+                doctorId : doctorIdVal,
+                patientId : patientIdVal
+            },
+            success: function(data)
+            {
+                $('#result').html(data);
+            }
+        });
         console.log(datetimepickerVal , doctorIdVal , patientIdVal);
 
     });
