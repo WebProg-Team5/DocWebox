@@ -82,7 +82,7 @@
                             <label for="inputPassword">Password</label>
                             <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password">
                         </div>
-                        <div class="custom-control custom-checkbox mb-3">
+                        <div class="custom-control custom-checkbox mt-3 mb-3">
                         <button class="btn btn-lg btn-primary btn-block textoff" type="submit" value="submit" name="submit">Sign in</button>
                         </form>
                         <?php echo"<b class='text-danger'>$error</b>"?>
