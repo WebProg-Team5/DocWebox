@@ -12,11 +12,11 @@
                   <li id="home"><a href="index.php">Home</a></li>
 
                   <?php if ($_SESSION['type'] === 'patient'){
-                    echo '<li id="searchDocs"><a href="patient/searchDocs.php?id='.$_SESSION['id'].'">Search Doctors</a></li>
-                          <li id="myAppointments"><a href="patient/myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>';
+                    echo '<li id="searchDocs"><a href="patient/searchDocs.php">Search Doctors</a></li>
+                          <li id="myAppointments"><a href="patient/myAppointments.php">My Appointments</a></li>';
                   } else if($_SESSION['type'] === 'doctor'){
-                    echo '<li id="myAppointments"><a href="doctor/myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>
-                          <li id="myProfiel"><a href="doctor/myProfile.php?id='.$_SESSION['id'].'">My Profile</a></li>';
+                    echo '<li id="myAppointments"><a href="doctor/myAppointments.php">My Appointments</a></li>
+                          <li id="myProfiel"><a href="doctor/myProfile.php">My Profile</a></li>';
                   } else if($_SESSION['type'] === 'admin'){
                     '<li id="mngAppointments"><a href="admin/manageAppointments.php">Manage Appointments</a></li>
                           <li id="mngDocs"><a href="admin/manageDoctors.php">Manage Doctors</a></li>';
@@ -30,7 +30,7 @@
               </div>
               <div class="header-action-area">
                 <div class="login-reg">
-                  <a href=""><?php echo $_SESSION['username']?></a><span>/</span><a href="logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
+                  <a class="page-item disabled"><?php echo $_SESSION['username']?></a><span>/</span><a href="logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
                 </div>
                 <button class="btn-menu d-lg-none">
                   <span></span>

@@ -9,7 +9,8 @@
   // echo "<br><br><br><br><br><br><br>" .
   //   $_SESSION['username'] . "<br>" . 
   //   $_SESSION['loggedIn'] . "<br>" . 
-  //   $_SESSION['type'];
+  //   $_SESSION['type']. "<br>" . 
+  //   $_SESSION['id'].
   //   "<br><br><br>";
 
 ?>

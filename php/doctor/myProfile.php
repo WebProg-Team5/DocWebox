@@ -23,6 +23,7 @@ if($result->num_rows > 0){
     $reviews = mysqli_fetch_all($result, MYSQLI_ASSOC);
     $reviewCount = count($reviews);
 }
+
 ?>
 
 <html>
@@ -32,136 +33,158 @@ if($result->num_rows > 0){
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DocWebox</title>
     <meta name="description" content="DocWebox"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets\img\icons\favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets\img\icons\favicon-16x16.png">
     <!--== Main Style CSS ==-->
     <link href="../assets/css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/propellerkit@1.3.1/dist/css/propeller.min.css" rel="stylesheet"></link>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
 </head>
 <body>
 <div>
     <div class="content-wrapper">
-    <header class="header-area header-default transparent sticky" style="background-color : #1B0F09 !important">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-12">
-            <div class="header-align">
-              <div class="header-logo-area">
-              </div>
-              <div class="header-navigation-area">
-                <ul class="main-menu nav justify-content-center">
-                  <li id="home"><a href="../index.php">Home</a></li>
-
-                  <?php if ($_SESSION['type'] === 'patient'){
-                    echo '<li id="searchDocs"><a href="patient/searchDocs.php?id='.$_SESSION['id'].'">Search Doctors</a></li>
-                          <li id="myAppointments"><a href="patient/myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>';
-                  } else if($_SESSION['type'] === 'doctor'){
-                    echo '<li id="myAppointments"><a href="myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>
-                          <li id="myProfiel"><a href="myProfile.php?id='.$_SESSION['id'].'">My Profile</a></li>';
-                  } else if($_SESSION['type'] === 'admin'){
-                    '<li id="mngAppointments"><a href="admin/manageAppointments.php">Manage Appointments</a></li>
-                          <li id="mngDocs"><a href="admin/manageDoctors.php">Manage Doctors</a></li>';
-                  }
-                  ?>
-                  
-                  <li id="services"><a href="../services.php">Services</a></li>
-                  <li id="about"><a href="../about.php">About</a></li>
-                  <li id="contact"><a href="../contact.php">Contact</a></li>
-                </ul>
-              </div>
-              <div class="header-action-area">
-                <div class="login-reg">
-                  <a href=""><?php echo $_SESSION['username']?></a><span>/</span><a href="../logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
+        <header class="header-area header-default transparent sticky" style="background-color : #1B0F09 !important">
+        <div class="container">
+            <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="header-align">
+                <div class="header-logo-area">
                 </div>
-                <button class="btn-menu d-lg-none">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+                <div class="header-navigation-area">
+                    <ul class="main-menu nav justify-content-center">
+                    <li id="home"><a href="../index.php">Home</a></li>
 
-    <div class="container-fluid text-center">
-            <?php echo "<img src={$doctor["avatarUrl"]} alt='Doctor Avatar'>" ?>
-            <?php echo "<h2 class='text-primary m-4'>{$doctor["name"]}</h2>"?>
-            <?php if($_SESSION['type'] == "patient") {
-                echo '<a href="" type="button" class="btn btn-outline-danger">Book Now</a>';
-            } ?>
-            <div class="col-sm-12 col-md-10 col-lg-8 mx-auto mt-4">
-                <div class="row mt-5">
-                    <div class="table-responsive table-sm">
-                        <table class="table table-hover table-bordered">
-                            <tr>
-                                <th scope="row">Insurance</th>
-                                <td><?php echo $doctor["insurance"]?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Specialisation</th>
-                                <td><?php echo $doctor["specialisation"]?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Price</th>
-                                <td><?php echo $doctor["price"]?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Ratings</th>
-                                <td><?php echo $rating?></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                
-                <?php echo "<h5 class='mt-4'>{$doctor["description"]}</h5>"?>
-
-                <div class="row mt-5">
-                    <div class="table-responsive table-sm">
-                        <table class="table table-hover table-bordered">
-                            <tr>
-                                <th scope="row">Email</th>
-                                <td><?php echo $doctor["email"]?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Phone</th>
-                                <td><?php echo $doctor["phone"]?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">City</th>
-                                <td><?php echo $doctor["location"]?></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <h3 class="mt-3">Reviews (<?php echo $reviewCount?> Found)</h3>
-
-                <div class="table-responsive  table-sm mb-5">
-                    <table class="table table-hover table-bordered">
-                        <tr>
-                            <th>Name</th>
-                            <th>Date</th>
-                            <th>Rating</th>
-                            <th>Content</th>
-                        </tr>
-                    <?php
-                        if ($reviewCount>0) {
-                            foreach ($reviews as $key => $value) {
-                                $rating = $value['rating']/2;
-                                echo "
-                                <tr>
-                                <td>{$value['name']}</td>
-                                <td>{$value['date']}</td>
-                                <td>{$rating} stars</td>
-                                <td>{$value['content']}</td>
-                                </tr>
-                            ";
-                            }
-                        }
+                    <?php if ($_SESSION['type'] === 'patient'){
+                        echo '<li id="searchDocs"><a href="patient/searchDocs.php?id='.$_SESSION['id'].'">Search Doctors</a></li>
+                            <li id="myAppointments"><a href="patient/myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>';
+                    } else if($_SESSION['type'] === 'doctor'){
+                        echo '<li id="myAppointments"><a href="myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>
+                            <li id="myProfiel"><a href="myProfile.php?id='.$_SESSION['id'].'">My Profile</a></li>';
+                    } else if($_SESSION['type'] === 'admin'){
+                        '<li id="mngAppointments"><a href="admin/manageAppointments.php">Manage Appointments</a></li>
+                            <li id="mngDocs"><a href="admin/manageDoctors.php">Manage Doctors</a></li>';
+                    }
                     ?>
+                    
+                    <li id="services"><a href="../services.php">Services</a></li>
+                    <li id="about"><a href="../about.php">About</a></li>
+                    <li id="contact"><a href="../contact.php">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="header-action-area">
+                    <div class="login-reg">
+                    <a href=""><?php echo $_SESSION['username']?></a><span>/</span><a href="../logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
+                    </div>
+                    <button class="btn-menu d-lg-none">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    </button>
+                </div>
                 </div>
             </div>
+            </div>
+        </div>
+        </header>
+
+        <div class="container-fluid text-center">
+                <?php echo "<input hidden id='doctorId' value='".$_GET["id"]."'>";
+                        echo "<input hidden id='patientId' value='".$_SESSION["id"]."'>";
+                ?>
+                <?php echo "<img src={$doctor["avatarUrl"]} alt='Doctor Avatar'>" ?>
+                <?php echo "<h2 class='text-secondary m-4'>{$doctor["name"]}</h2>"?>
+                <?php if($_SESSION['type'] == "patient") {
+                    echo '<div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 mx-auto">
+                            <div class="form-group">
+                                <div class="input-group date"id="datetimepicker">
+                                    <input id="datetime" type="text" class="form-control" />
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                <button id="submit" class="btn btn-outline-light bg-danger  btn-lg mt-4">Book Now</button>
+                                <div id="result">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+                } ?>
+
+                <div class="container mx-auto mt-4">
+                    <div class="row mt-5">
+                        <div class="table-responsive table-sm">
+                            <table class="table table-hover table-bordered">
+                                <tr>
+                                    <th scope="row">Insurance</th>
+                                    <td><?php echo $doctor["insurance"]?></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Specialisation</th>
+                                    <td><?php echo $doctor["specialisation"]?></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Price</th>
+                                    <td><?php echo $doctor["price"]?></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Ratings</th>
+                                    <td><?php echo $rating?></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <?php echo "<h5 class='mt-4'>{$doctor["description"]}</h5>"?>
+
+                    <div class="row mt-5">
+                        <div class="table-responsive table-sm">
+                            <table class="table table-hover table-bordered">
+                                <tr>
+                                    <th scope="row">Email</th>
+                                    <td><?php echo $doctor["email"]?></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Phone</th>
+                                    <td><?php echo $doctor["phone"]?></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">City</th>
+                                    <td><?php echo $doctor["location"]?></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="mt-3">Reviews (<?php echo $reviewCount?> Found)</h3>
+
+                    <div class="table-responsive mb-5">
+                        <table class="table table-hover table-sm table-bordered">
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Rating</th>
+                                <th>Content</th>
+                            </tr>
+                        <?php
+                            if ($reviewCount>0) {
+                                foreach ($reviews as $key => $value) {
+                                    $rating = $value['rating']/2;
+                                    echo "
+                                    <tr>
+                                    <td>{$value['name']}</td>
+                                    <td>{$value['date']}</td>
+                                    <td>{$rating} stars</td>
+                                    <td>{$value['content']}</td>
+                                    </tr>
+                                ";
+                                }
+                            }
+                        ?>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
@@ -169,24 +192,42 @@ if($result->num_rows > 0){
 </html>
 
 <!--=======================Javascript============================-->
-  <!--=== Modernizr Min Js ===-->
-  <script src="../assets/js/modernizr.js"></script>
-  <!--=== jQuery Min Js ===-->
-  <script src="../assets/js/jquery-main.js"></script>
-  <!--=== jQuery Migration Min Js ===-->
-  <script src="../assets/js/jquery-migrate.js"></script>
-  <!--=== Popper Min Js ===-->
-  <script src=../assets/js/popper.min.js"></script>
-  <!--=== Bootstrap Min Js ===-->
-  <script src="../assets/js/bootstrap.min.js"></script>
-  <!--=== jquery UI Min Js ===-->
-  <script src="../assets/js/jquery-ui.min.js"></script>
-  <!--=== Plugin Collection Js ===-->
-  <script src="../assets/js/plugincollection.js"></script>
-  <!--=== Custom Js ===-->
-  <script src="../assets/js/custom.js"></script>
-  <!--=======================Javascript============================-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-  <script>
+<script>
+    let datetimepickerVal = $('#datetimepicker').data();
+    let doctorIdVal = $("#doctorId").val();
+    let patientIdVal = $("#patientId").val();
+
     $("#myProfile").addClass("active");
+
+    $('#datetimepicker').datetimepicker({
+        minDate: new Date()
+    });
+
+    $("#submit").on('click', function() {;
+        // $.ajax({
+        //     url: "../patient/closeAppointment",
+        //     method:"GET",
+        //     data:{
+        //         date: datetimepickerVal,
+        //         confirmed: 0,
+        //         doctorId : doctorIdVal,
+        //         patientId : patientIdVal
+        //     },
+        //     success: function(data)
+        //     {
+        //         $('#result').html(data);
+        //     }
+        // });
+        console.log(datetimepickerVal , doctorIdVal , patientIdVal);
+
+    });
+    
+
   </script>
