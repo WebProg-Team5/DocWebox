@@ -9,6 +9,8 @@
     //Sanitize the form data
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $name = mysqli_real_escape_string($conn, $_POST['fullName']);
+    $phoneNumber = mysqli_real_escape_string($conn, $_POST['phoneNumber']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $password_confirm = mysqli_real_escape_string($conn, $_POST['password_confirm']);
 
@@ -41,16 +43,25 @@
       if (count($errors) == 0) {
         $password = password_hash($password, PASSWORD_DEFAULT);//encrypt the password before saving in the database
     
-        $stmt = $conn->prepare("INSERT INTO patients (username, password, email) VALUES (? , ?, ?)");
-        $stmt->bind_param("sss",$username, $password, $email);
+        $stmt = $conn->prepare("INSERT INTO patients (id,username,password,name,email,phone) VALUES (NULL,?,?,?,?,?)");
+        $stmt->bind_param("sssss",$username,$password,$name,$email,$phoneNumber);
         $stmt->execute();
+      }
+      
+        $sql = 'SELECT id FROM patients WHERE username = ?';
+
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt -> get_result();
+        $user = $result->fetch_assoc(); 
 
         //Set the Session Variables
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $email;
         $_SESSION['loggedIn'] = TRUE;
         $_SESSION['type'] = "patient";
-        $_SESSION['id'] = $id;
+        $_SESSION['id'] = $user['id'];
         
         header('location: index.php');
       }
@@ -91,6 +102,14 @@
               <div class="form-label-group">
                 <label for="inputEmail">Username</label>
                 <input type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus name="username">
+              </div>
+              <div class="form-label-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" class="form-control" placeholder="Full Name" required autofocus name="fullName">
+              </div>
+              <div class="form-label-group">
+                <label for="name">Phone Number</label>
+                <input type="tel" id="phoneNumber" class="form-control" placeholder="Phone Number" required autofocus name="phoneNumber">
               </div>
               <div class="form-label-group">
                 <label for="inputEmail">Email address</label>

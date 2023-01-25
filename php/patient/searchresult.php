@@ -1,4 +1,5 @@
 <?php
+session_start();
 include ('../connect.php');
 $return = '';
 
@@ -39,14 +40,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     if(mysqli_num_rows($result) > 0){
         $return .='
         <div class="table-responsive table-sm">
-        <table class="table table bordered">
+        <table class="table table-hover bordered">
         <tr>
             <th></th>
             <th>Name</th>
             <th>Specialisation</th>
             <th>Location</th>
             <th>Insurance</th>
-            <th></th>
+            <th>Rating</th>
         </tr>';
 
         while($row1 = mysqli_fetch_array($result))
@@ -58,6 +59,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             <td>'.$row1["specialisation"].'</td>
             <td>'.$row1["location"].'</td>
             <td>'.$row1["insurance"].'</td>
+            <td> </td>
             <td>
             <a href="../doctor/myProfile.php?id='.$row1["id"] .'" type="button" class="btn btn-outline-danger">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">

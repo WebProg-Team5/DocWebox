@@ -1,4 +1,5 @@
 <?php 
+    session_start();
 	include("../connect.php");
  
     $query ="SELECT DISTINCT insurance FROM doctors";
@@ -18,6 +19,14 @@
     if($result->num_rows> 0){
       $available_Specs = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
+
+    //!!! SELECT THE 5 TOP RATED DOCTORS
+    // $query = "SELECT DISTINCT d.* FROM reviews as r JOIN doctors as d ON r.doctorID=d.id ORDER BY rating DESC LIMIT 5";
+    // $result = $conn->query($query);
+    // if($result->num_rows> 0){
+    //   $bestDoctors = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    // }
+
 ?>
 
 <html>
@@ -88,7 +97,7 @@
 
         </div>
         
-        <div class="container col-sm-12 col-md-10 col-lg-8  mx-auto mt-4" id="result">         
+        <div class="container col-sm-12  mx-auto mt-4" id="result">    
         </div>
 	</div>
 </div>

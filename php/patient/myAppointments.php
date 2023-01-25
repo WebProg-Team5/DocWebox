@@ -4,12 +4,13 @@ include("../connect.php");
 
 $id = $_SESSION["id"];
 //$id = htmlspecialchars($_GET["id"]); //alternative
-$query ="SELECT d.name, a.* FROM appointments as a JOIN doctors as d ON a.doctorID=d.id WHERE patientID={$id} ORDER BY date";
+$query ="SELECT d.name, a.* FROM appointments as a JOIN doctors as d ON a.doctorID=d.id WHERE patientID={$id} ORDER BY a.date";
 $result = $conn->query($query);
 if($result->num_rows > 0){
     $appointments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 ?>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -119,7 +120,7 @@ if($result->num_rows > 0){
 <!--=== jQuery Migration Min Js ===-->
 <script src="../assets/js/jquery-migrate.js"></script>
 <!--=== Popper Min Js ===-->
-<script src=../assets/js/popper.min.js"></script>
+<script src="../assets/js/popper.min.js"></script>
 <!--=== Bootstrap Min Js ===-->
 <script src="../assets/js/bootstrap.min.js"></script>
 <!--=== jquery UI Min Js ===-->

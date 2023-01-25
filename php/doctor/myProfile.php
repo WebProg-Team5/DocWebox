@@ -39,57 +39,120 @@ if($result->num_rows > 0){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/propellerkit@1.3.1/dist/css/propeller.min.css" rel="stylesheet"></link>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        div.stars {
+            width: 270px;
+            display: inline-block;
+        }
+
+        input.star { display: none; }
+
+        label.star {
+
+        float: right;
+
+        padding: 10px;
+
+        font-size: 25px;
+
+        color: #4A148C;
+
+        transition: all .2s;
+
+        }
+
+
+
+        input.star:checked ~ label.star:before {
+
+        content: '\f005';
+
+        color: #FD4;
+
+        transition: all .25s;
+
+        }
+
+
+        input.star-5:checked ~ label.star:before {
+
+        color: #FE7;
+
+        text-shadow: 0 0 20px #952;
+
+        }
+
+
+
+        input.star-1:checked ~ label.star:before { color: #F62; }
+
+        
+
+        label.star:hover { transform: rotate(-15deg) scale(1.3); }
+
+
+
+        label.star:before {
+
+        content: '\f006';
+
+        font-family: FontAwesome;
+
+        }
+    </style>
 </head>
 <body>
 <div>
     <div class="content-wrapper">
         <header class="header-area header-default transparent sticky" style="background-color : #1B0F09 !important">
-        <div class="container">
-            <div class="row align-items-center">
-            <div class="col-lg-12">
-                <div class="header-align">
-                <div class="header-logo-area">
-                </div>
-                <div class="header-navigation-area">
-                    <ul class="main-menu nav justify-content-center">
-                    <li id="home"><a href="../index.php">Home</a></li>
-
-                    <?php if ($_SESSION['type'] === 'patient'){
-                        echo '<li id="searchDocs"><a href="patient/searchDocs.php?id='.$_SESSION['id'].'">Search Doctors</a></li>
-                            <li id="myAppointments"><a href="patient/myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>';
-                    } else if($_SESSION['type'] === 'doctor'){
-                        echo '<li id="myAppointments"><a href="myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>
-                            <li id="myProfiel"><a href="myProfile.php?id='.$_SESSION['id'].'">My Profile</a></li>';
-                    } else if($_SESSION['type'] === 'admin'){
-                        '<li id="mngAppointments"><a href="admin/manageAppointments.php">Manage Appointments</a></li>
-                            <li id="mngDocs"><a href="admin/manageDoctors.php">Manage Doctors</a></li>';
-                    }
-                    ?>
-                    
-                    <li id="services"><a href="../services.php">Services</a></li>
-                    <li id="about"><a href="../about.php">About</a></li>
-                    <li id="contact"><a href="../contact.php">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="header-action-area">
-                    <div class="login-reg">
-                    <a href=""><?php echo $_SESSION['username']?></a><span>/</span><a href="../logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
+            <div class="container">
+                <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="header-align">
+                    <div class="header-logo-area">
                     </div>
-                    <button class="btn-menu d-lg-none">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    </button>
+                    <div class="header-navigation-area">
+                        <ul class="main-menu nav justify-content-center">
+                        <li id="home"><a href="../index.php">Home</a></li>
+
+                        <?php if ($_SESSION['type'] === 'patient'){
+                            echo '<li id="searchDocs"><a href="../patient/searchDocs.php?id='.$_SESSION['id'].'">Search Doctors</a></li>
+                                <li id="myAppointments"><a href="../patient/myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>';
+                        } else if($_SESSION['type'] === 'doctor'){
+                            echo '<li id="myAppointments"><a href="myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>
+                                <li id="myProfiel"><a href="myProfile.php?id='.$_SESSION['id'].'">My Profile</a></li>';
+                        } else if($_SESSION['type'] === 'admin'){
+                            '<li id="mngAppointments"><a href="admin/manageAppointments.php">Manage Appointments</a></li>
+                                <li id="mngDocs"><a href="admin/manageDoctors.php">Manage Doctors</a></li>';
+                        }
+                        ?>
+                        
+                        <li id="services"><a href="../services.php">Services</a></li>
+                        <li id="about"><a href="../about.php">About</a></li>
+                        <li id="contact"><a href="../contact.php">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="header-action-area">
+                        <div class="login-reg">
+                        <a disabled><?php echo $_SESSION['username']?></a><span>/</span><a href="../logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
+                        </div>
+                        <button class="btn-menu d-lg-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        </button>
+                    </div>
+                    </div>
                 </div>
                 </div>
             </div>
-            </div>
-        </div>
         </header>
 
         <div class="container-fluid text-center">
                 <?php echo "<input hidden id='doctorId' value='".$_GET["id"]."'>";
-                        echo "<input hidden id='patientId' value='".$_SESSION["id"]."'>";
+                      echo "<input hidden id='patientId' value='".$_SESSION["id"]."'>";
                 ?>
                 <?php echo "<img src={$doctor["avatarUrl"]} alt='Doctor Avatar'>" ?>
                 <?php echo "<h2 class='text-secondary m-4'>{$doctor["name"]}</h2>"?>
@@ -105,7 +168,7 @@ if($result->num_rows > 0){
                                     </span>
                                 </div>
                                 <button id="submit" class="btn btn-outline-light bg-danger  btn-lg mt-4">Book Now</button>
-                                <div id="result">
+                                <div id="result" class="mt-4">
                                 </div>
                             </div>
                         </div>
@@ -159,6 +222,26 @@ if($result->num_rows > 0){
                     </div>
 
                     <h3 class="mt-3">Reviews (<?php echo $reviewCount?> Found)</h3>
+                    <?php if($_SESSION['type'] == "patient"){
+                        echo 
+                        '<div class="stars">
+                            <form action="" >
+                            <h3 class="mt-3">Rate Doctor</h3>
+                            <input class="star star-5" id="star-5" type="radio" name="star"/>
+                            <label class="star star-5" for="star-5"></label>
+                            <input class="star star-4" id="star-4" type="radio" name="star"/>
+                            <label class="star star-4" for="star-4"></label>
+                            <input class="star star-3" id="star-3" type="radio" name="star"/>
+                            <label class="star star-3" for="star-3"></label>
+                            <input class="star star-2" id="star-2" type="radio" name="star"/>
+                            <label class="star star-2" for="star-2"></label>
+                            <input class="star star-1" id="star-1" type="radio" name="star"/>
+                            <label class="star star-1" for="star-1"></label>
+                            </form> 
+                        </div>';
+                    }
+                    ?>
+                    
 
                     <div class="table-responsive mb-5">
                         <table class="table table-hover table-sm table-bordered">
@@ -224,9 +307,9 @@ if($result->num_rows > 0){
             success: function(data)
             {
                 $('#result').html(data);
+                console.log(data);
             }
         });
-        console.log(datetimepickerVal , doctorIdVal , patientIdVal);
 
     });
     
