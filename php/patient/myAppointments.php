@@ -2,6 +2,18 @@
 session_start();
 include("../connect.php");
 
+// Appointment Deletion
+if (isset($_POST)) {
+    $id = isset($_POST['id']) ? $_POST['id'] : null;
+    if ($id != null) {
+        $query ="DELETE FROM appointments WHERE id={$id}";
+        $conn->query($query);
+    }
+    if (isset($_POST['next'])) {
+        header("Location: {$_POST['next']}");
+    }
+}
+
 $id = $_SESSION["id"];
 //$id = htmlspecialchars($_GET["id"]); //alternative
 $query ="SELECT d.name, a.* FROM appointments as a JOIN doctors as d ON a.doctorID=d.id WHERE patientID={$id} ORDER BY a.date";
@@ -90,7 +102,18 @@ if($result->num_rows > 0){
                                 <td>{$value['name']}</td>
                                 <td>{$value['date']}</td>
                                 <td>{$confirmation}</td>
-                                <td><a href='../doctor/myProfile.php?id={$value['doctorID']}' type='button' class='btn btn-outline-primary'>Go to Profile</a></td>
+                                <td>
+                                    <a href='../doctor/myProfile.php?id={$value['doctorID']}' type='button' class='btn btn-outline-primary'>Go to Profile</a>
+                                    <form method='post' action='/patient/myAppointments.php'>
+                                      <input type='hidden' name='id' value={$value['id']}>
+                                      <input type='hidden' name='next' value='../doctor/myProfile.php?id={$value['doctorID']}'>
+                                      <input type='submit' value='Change Date' class='btn btn-warning'>
+                                    </form>
+                                    <form method='post' action='/patient/myAppointments.php'>
+                                      <input type='hidden' name='id' value={$value['id']}>
+                                      <input type='submit' value='Delete' class='btn btn-danger'>
+                                    </form>
+                                </td>
                                 </tr>
                             ";
                             }
