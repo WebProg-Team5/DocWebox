@@ -629,7 +629,7 @@ CREATE TABLE `users` (
 --
 DROP TABLE IF EXISTS `rankedDoctors`;
 
-CREATE VIEW `rankedDoctors`  AS SELECT `d`.`id` AS `id`, `d`.`username` AS `username`, `d`.`password` AS `password`, `d`.`name` AS `name`, `d`.`email` AS `email`, `d`.`avatarUrl` AS `avatarUrl`, `d`.`phone` AS `phone`, `d`.`location` AS `location`, `d`.`insurance` AS `insurance`, `d`.`specialisation` AS `specialisation`, `d`.`price` AS `price`, `d`.`description` AS `description`, avg(`r`.`rating`) AS `rating` FROM (`doctors` `d` left join `reviews` `r` on(`r`.`doctorID` = `d`.`id`)) GROUP BY `d`.`id` ORDER BY avg(`r`.`rating`) AS `DESCdesc` ASC  ;
+CREATE VIEW `rankedDoctors`  AS SELECT `d`.`id` AS `id`, `d`.`username` AS `username`, `d`.`password` AS `password`, `d`.`name` AS `name`, `d`.`email` AS `email`, `d`.`avatarUrl` AS `avatarUrl`, `d`.`phone` AS `phone`, `d`.`location` AS `location`, `d`.`insurance` AS `insurance`, `d`.`specialisation` AS `specialisation`, `d`.`price` AS `price`, `d`.`description` AS `description`, avg(`r`.`rating`) AS `rating` FROM (`doctors` `d` left join `reviews` `r` on(`r`.`doctorID` = `d`.`id`)) GROUP BY `d`.`id` ORDER BY avg(`r`.`rating`) DESC ;
 
 -- --------------------------------------------------------
 
