@@ -79,12 +79,15 @@ function createSchema($pdo) {
         FOREIGN KEY (doctorID) REFERENCES doctors(id)
       );
 
-      CREATE VIEW users AS
+      CREATE VIEW IF NOT EXISTS users AS
         SELECT id, username, email, password, 'patient' AS type FROM patients
         UNION ALL
         SELECT id, username, email, password, 'doctor' AS type FROM doctors
         UNION ALL
         SELECT id, username, email, password, 'admin' AS type FROM admins;
+
+      CREATE VIEW IF NOT EXISTS rankedDoctors AS
+        SELECT d.*, AVG(r.rating) as rating FROM reviews as r RIGHT JOIN doctors as d ON r.doctorID=d.id GROUP BY d.id ORDER BY rating DESC
       ";
     $pdo->query($sql);
 }
