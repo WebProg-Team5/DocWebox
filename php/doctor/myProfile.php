@@ -162,10 +162,10 @@ if($result->num_rows > 0){
             ?>
 
             <?php if($_SESSION['type'] == "doctor" || $_SESSION['type'] == "admin") {
-                echo '<input id="avatarInput" class="form-control form-control-sm mt-3 mb-3 col-sm-6 mx-auto" type="file" id="formFile">';
+                echo '<input id="avatarInput" class="form-control form-control-sm mt-3 mb-3 col-sm-6 mx-auto" type="file" id="formFile" style="display: none">';
                 echo "<button id='edit' name='edit' class='btn btn-lg btn-danger mt-4'>Edit Your Profile</button>
-                      <button id='save' name='save' class='btn btn-lg btn-success mt-4'>Save Changes</button>
-                      <button id='cancel' name='cancel' class='btn btn-lg btn-danger mt-4'>Cancel Changes</button>";
+                      <button id='save' name='save' class='btn btn-lg btn-success mt-4' style='display: none'>Save Changes</button>
+                      <button id='cancel' name='cancel' class='btn btn-lg btn-danger mt-4' style='display: none'>Cancel Changes</button>";
                 echo '<div id="result" class="mt-5">
                       </div>';
             }
@@ -309,9 +309,6 @@ if($result->num_rows > 0){
         format: 'YYYY-MM-DD HH:mm',
         minDate: new Date()
         });
-        $('#avatarInput').hide();
-        $('#save').hide();
-        $('#cancel').hide();
         
     });
 
@@ -399,6 +396,11 @@ if($result->num_rows > 0){
                     }
         });    
     });
+
+    $("#cancel").on('click', function(){
+        location.reload();
+    });
+
     
 
   </script>
