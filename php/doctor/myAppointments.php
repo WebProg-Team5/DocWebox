@@ -46,10 +46,10 @@ if($result->num_rows > 0){
                                     <li id="home"><a href="../index.php">Home</a></li>
 
                                     <?php if ($_SESSION['type'] === 'patient'){
-                                        echo '<li id="searchDocs"><a href="patient/searchDocs.php?id='.$_SESSION['id'].'">Search Doctors</a></li>
-                                                <li id="myAppointments"><a href="patient/myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>';
+                                        echo '<li id="searchDocs"><a href="patient/searchDocs.php">Search Doctors</a></li>
+                                                <li id="myAppointments"><a href="patient/myAppointments.php">My Appointments</a></li>';
                                     } else if($_SESSION['type'] === 'doctor'){
-                                        echo '<li id="myAppointments"><a href="myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>
+                                        echo '<li id="myAppointments"><a href="myAppointments.php">My Appointments</a></li>
                                                 <li id="myProfiel"><a href="myProfile.php?id='.$_SESSION['id'].'">My Profile</a></li>';
                                     } else if($_SESSION['type'] === 'admin'){
                                         '<li id="mngAppointments"><a href="admin/manageAppointments.php">Manage Appointments</a></li>
