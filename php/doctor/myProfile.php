@@ -161,7 +161,7 @@ if($result->num_rows > 0){
                 echo "<h3 id='doctorName'class='editable text-secondary m-4'>{$doctor['name']}</h3>";
             ?>
 
-            <?php if($_SESSION['type'] == "doctor" || $_SESSION['type'] == "admin") {
+            <?php if( ($_SESSION['type'] == "doctor" && $_SESSION['id'] == $id ) || $_SESSION['type'] == "admin") {
                 echo '<input id="avatarInput" class="form-control form-control-sm mt-3 mb-3 col-sm-6 mx-auto" type="file" id="formFile" style="display: none">';
                 echo "<button id='edit' name='edit' class='btn btn-lg btn-danger mt-4'>Edit Your Profile</button>
                       <button id='save' name='save' class='btn btn-lg btn-success mt-4' style='display: none'>Save Changes</button>
