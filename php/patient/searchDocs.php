@@ -38,14 +38,58 @@
     <meta name="description" content="DocWebox"/>
     <link rel="icon" type="image/png" sizes="32x32" href="assets\img\icons\favicon-16x16.png">
     <!--== Main Style CSS ==-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="../assets/css/style.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
-<div class="container-fluid">       
+<div>
 <div class="content-wrapper">
+    <header class="header-area header-default transparent sticky" style="background-color : #1B0F09 !important">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="header-align">
+                        <div class="header-logo-area">
+                        </div>
+                        <div class="header-navigation-area">
+                            <ul class="main-menu nav justify-content-center">
+                                <li id="home"><a href="../index.php">Home</a></li>
+
+                                <?php if ($_SESSION['type'] === 'patient'){
+                                    echo '<li id="searchDocs"><a href="searchDocs.php?id='.$_SESSION['id'].'">Search Doctors</a></li>
+                                                <li id="myAppointments"><a href="myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>';
+                                } else if($_SESSION['type'] === 'doctor'){
+                                    echo '<li id="myAppointments"><a href="myAppointments.php?id='.$_SESSION['id'].'">My Appointments</a></li>
+                                                <li id="myProfiel"><a href="myProfile.php?id='.$_SESSION['id'].'">My Profile</a></li>';
+                                } else if($_SESSION['type'] === 'admin'){
+                                    '<li id="mngAppointments"><a href="admin/manageAppointments.php">Manage Appointments</a></li>
+                                         <li id="mngDocs"><a href="admin/manageDoctors.php">Manage Doctors</a></li>';
+                                }
+                                ?>
+
+                                <li id="services"><a href="../services.php">Services</a></li>
+                                <li id="about"><a href="../about.php">About</a></li>
+                                <li id="contact"><a href="../contact.php">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="header-action-area">
+                            <div class="login-reg">
+                                <a href=""><?php echo $_SESSION['username']?></a><span>/</span><a href="../logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
+                            </div>
+                            <button class="btn-menu d-lg-none">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
 	<div class="container-fluid text-center ">
         <div class="col-sm-12 mt-4">
             <img src="../assets\img\brand-logo\docwebox(160x100).png" alt="DocWeboxLogo">
