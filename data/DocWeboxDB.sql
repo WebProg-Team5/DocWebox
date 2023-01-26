@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Jan 19, 2023 at 11:37 PM
+-- Generation Time: Jan 26, 2023 at 01:08 AM
 -- Server version: 10.8.3-MariaDB-1:10.8.3+maria~jammy
 -- PHP Version: 8.0.27
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `DocWeboxDB`
 --
+CREATE DATABASE IF NOT EXISTS `DocWeboxDB` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `DocWeboxDB`;
 
 -- --------------------------------------------------------
 
@@ -466,6 +468,28 @@ INSERT INTO `patients` (`id`, `username`, `password`, `name`, `email`, `phone`) 
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `rankedDoctors`
+-- (See below for the actual view)
+--
+CREATE TABLE `rankedDoctors` (
+`id` int(11)
+,`username` varchar(50)
+,`password` varchar(255)
+,`name` varchar(255)
+,`email` varchar(255)
+,`avatarUrl` varchar(255)
+,`phone` varchar(50)
+,`location` varchar(255)
+,`insurance` varchar(255)
+,`specialisation` varchar(255)
+,`price` double
+,`description` text
+,`rating` decimal(14,4)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `reviews`
 --
 
@@ -597,6 +621,15 @@ CREATE TABLE `users` (
 ,`password` varchar(255)
 ,`type` varchar(7)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `rankedDoctors`
+--
+DROP TABLE IF EXISTS `rankedDoctors`;
+
+CREATE VIEW `rankedDoctors`  AS SELECT `d`.`id` AS `id`, `d`.`username` AS `username`, `d`.`password` AS `password`, `d`.`name` AS `name`, `d`.`email` AS `email`, `d`.`avatarUrl` AS `avatarUrl`, `d`.`phone` AS `phone`, `d`.`location` AS `location`, `d`.`insurance` AS `insurance`, `d`.`specialisation` AS `specialisation`, `d`.`price` AS `price`, `d`.`description` AS `description`, avg(`r`.`rating`) AS `rating` FROM (`doctors` `d` left join `reviews` `r` on(`r`.`doctorID` = `d`.`id`)) GROUP BY `d`.`id` ORDER BY avg(`r`.`rating`) AS `DESCdesc` ASC  ;
 
 -- --------------------------------------------------------
 
