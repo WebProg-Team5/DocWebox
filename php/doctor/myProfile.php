@@ -42,6 +42,9 @@ if($result->num_rows > 0){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
+    .focused { background: #E0F8E0 !important;}
+
+
         div.stars {
             width: 270px;
             display: inline-block;
@@ -150,13 +153,25 @@ if($result->num_rows > 0){
             </div>
         </header>
 
-        <div class="container-fluid text-center">
-                <?php echo "<input hidden id='doctorId' value='".$_GET["id"]."'>";
-                      echo "<input hidden id='patientId' value='".$_SESSION["id"]."'>";
-                ?>
-                <?php echo "<img src={$doctor["avatarUrl"]} alt='Doctor Avatar'>" ?>
-                <?php echo "<h2 class='text-secondary m-4'>{$doctor["name"]}</h2>"?>
-                <?php if($_SESSION['type'] == "patient") {
+        <div class="container-fluid text-center mt-5">
+            <?php
+                echo "<img id='avatar' src={$doctor["avatarUrl"]} alt='Doctor Avatar'>";
+                echo "<input hidden id='doctorId' value='".$_GET["id"]."'>";
+                echo "<input hidden id='patientId' value='".$_SESSION["id"]."'>";
+                echo "<h3 id='doctorName'class='editable text-secondary m-4'>{$doctor['name']}</h3>";
+            ?>
+
+            <?php if($_SESSION['type'] == "doctor" || $_SESSION['type'] == "admin") {
+                echo '<input id="avatarInput" class="form-control form-control-sm mt-3 mb-3 col-sm-6 mx-auto" type="file" id="formFile">';
+                echo "<button id='edit' name='edit' class='btn btn-lg btn-danger mt-4'>Edit Your Profile</button>
+                      <button id='save' name='save' class='btn btn-lg btn-success mt-4'>Save Changes</button>
+                      <button id='cancel' name='cancel' class='btn btn-lg btn-danger mt-4'>Cancel Changes</button>";
+                echo '<div id="result" class="mt-5">
+                      </div>';
+            }
+            ?>
+
+               <?php if($_SESSION['type'] == "patient") {
                     echo '<div class="container">
                     <div class="row">
                         <div class="col-sm-6 mx-auto">
@@ -179,48 +194,49 @@ if($result->num_rows > 0){
                 <div class="container mx-auto mt-4">
                     <div class="row mt-5">
                         <div class="table-responsive table-sm">
-                            <table class="table table-hover table-bordered">
+                            <table class="table table-bordered">
                                 <tr>
                                     <th scope="row">Insurance</th>
-                                    <td><?php echo $doctor["insurance"]?></td>
+                                    <td id="insurance"  class='editable'><?php echo $doctor["insurance"]?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Specialisation</th>
-                                    <td><?php echo $doctor["specialisation"]?></td>
+                                    <td id="specialisation"  class='editable'><?php echo $doctor["specialisation"]?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Price</th>
-                                    <td><?php echo $doctor["price"]?></td>
+                                    <td id="price" class='editable'><?php echo $doctor["price"]?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Ratings</th>
-                                    <td><?php echo $rating?></td>
+                                    <td id="ratings" class='editable'><?php echo $rating?></td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                     
-                    <?php echo "<h5 class='mt-4'>{$doctor["description"]}</h5>"?>
+                    <?php echo "<textarea class='form-control editable' disabled rows='8' id='description'class='editable mt-4'>{$doctor["description"]}</textarea>"?>
 
                     <div class="row mt-5">
                         <div class="table-responsive table-sm">
-                            <table class="table table-hover table-bordered">
+                            <table class="table table-bordered">
                                 <tr>
                                     <th scope="row">Email</th>
-                                    <td><?php echo $doctor["email"]?></td>
+                                    <td id="email" class='editable'><?php echo $doctor["email"]?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Phone</th>
-                                    <td><?php echo $doctor["phone"]?></td>
+                                    <td id="phone" class='editable'><?php echo $doctor["phone"]?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">City</th>
-                                    <td><?php echo $doctor["location"]?></td>
+                                    <td id="location" class='editable'><?php echo $doctor["location"]?></td>
                                 </tr>
                             </table>
                         </div>
                     </div>
 
+                    <!-- STAR RATING AS A PATIENT -->
                     <h3 class="mt-3">Reviews (<?php echo $reviewCount?> Found)</h3>
                     <?php if($_SESSION['type'] == "patient"){
                         echo 
@@ -242,7 +258,7 @@ if($result->num_rows > 0){
                     }
                     ?>
                     
-
+                    <!-- REVIEWS -->
                     <div class="table-responsive mb-5">
                         <table class="table table-hover table-sm table-bordered">
                             <tr>
@@ -287,11 +303,16 @@ if($result->num_rows > 0){
     let doctorIdVal = $("#doctorId").val();
     let patientIdVal = $("#patientId").val();
 
-    $("#myProfile").addClass("active");
-
-    $('#datetimepicker').datetimepicker({
+    $(document).ready(function(){
+        $("#myProfile").addClass("active");
+        $('#datetimepicker').datetimepicker({
         format: 'YYYY-MM-DD HH:mm',
         minDate: new Date()
+        });
+        $('#avatarInput').hide();
+        $('#save').hide();
+        $('#cancel').hide();
+        
     });
 
     $("#submit").on('click', function() {;
@@ -310,7 +331,73 @@ if($result->num_rows > 0){
                 console.log(data);
             }
         });
+    });
 
+    $
+
+    $("#edit").on('click', function(){
+        $('#avatarInput').show();
+        $('#edit').hide();
+        $('#save').show();
+        $('#cancel').show();
+        $('.editable').each(function(){
+            $(this).prop('contenteditable', true); 
+            if($(this).is("td")) {
+                let tr = $(this).closest('tr');
+                tr.addClass('info');
+            }
+            if($(this).is("textarea")){
+                $(this).prop('disabled', false);
+            }
+            if($(this).is("h3")){
+                var input = $('<input id="fullName" class="editable form-control mt-5 mb-5 col-sm-6 mx-auto" />').val($(this).text());
+                $(this).replaceWith(input);
+            }
+            $(this).attr('editing', 1);
+        });
+    });
+
+    $("#save").on('click', function(){
+        $('#avatarInput').hide();
+        $('#save').hide();
+        $('#cancel').hide();
+        $('#edit').show();
+
+        let assoc = {};
+        assoc['id'] = $('#doctorId').val();
+        assoc['avatarUrl'] = $('#avatarInput').val();
+        $('.editable').each(function(){
+            let key = $(this).attr('id');
+            let value = $(this).text();
+            $(this).prop('contenteditable', false); 
+            if($(this).is("td")) {
+                let tr = $(this).closest('tr');
+                tr.removeClass('info');
+            }
+            if($(this).is("textarea")){
+                $(this).prop('disabled', true);
+            }
+            if($(this).is("input")){
+                let h3 = $("<h3 id='doctorName'class='editable text-secondary m-4'>{$doctor['name']}</h3>").text($(this).val());
+                $(this).replaceWith(h3);
+                key = "name";
+                value = $(this).val();
+            }
+            $(this).attr('editing', 0);
+            assoc[key] = value;
+        });
+        
+        console.log(assoc);
+
+        $.ajax({
+                    url:"updateProfile.php",
+                    method:"POST",
+                    data: assoc,
+                    success: function(data)
+                    {
+                        $('#result').html(data);
+                    }
+        });    
     });
     
 
