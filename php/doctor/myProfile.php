@@ -40,6 +40,8 @@ if($result->num_rows > 0){
     <link href="https://cdn.jsdelivr.net/npm/propellerkit@1.3.1/dist/css/propeller.min.css" rel="stylesheet"></link>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">    
 
     <style>
     .focused { background: #E0F8E0 !important;}
@@ -286,6 +288,9 @@ if($result->num_rows > 0){
                 </div>
         </div>
     </div>
+    <!--== Scroll Top Button / Side Menu ==-->
+  <?php include '../commonsPhp/topButton_sideMenu.php'?>
+  <!--== End Scroll Top Button / Side Menu ==--> 
 </div>
 </body>
 </html>
@@ -295,8 +300,19 @@ if($result->num_rows > 0){
 <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!--=======================Javascript============================-->
+<!--=== Modernizr Min Js ===-->
+<script src="../assets/js/modernizr.js"></script>
+<script src="../assets/js/jquery-migrate.js"></script>
+<!--=== Popper Min Js ===-->
+<script src="../assets/js/popper.min.js"></script>
+<script src="../assets/js/jquery-ui.min.js"></script>
+<!--=== Plugin Collection Js ===-->
+<script src="../assets/js/plugincollection.js"></script>
+<!--=== Custom Js ===-->
+<script src="../assets/js/custom.js"></script>
+<!--=======================Javascript============================-->
 
 <script>
     let datetimepickerVal = $('#datetimepicker').data();
@@ -363,6 +379,7 @@ if($result->num_rows > 0){
         let assoc = {};
         assoc['id'] = $('#doctorId').val();
         assoc['avatarUrl'] = $('#avatarInput').val();
+        if(assoc['avatarUrl'] == '') assoc['avatarUrl'] = $('#avatar').attr('src');
         $('.editable').each(function(){
             let key = $(this).attr('id');
             let value = $(this).text();

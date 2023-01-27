@@ -108,6 +108,9 @@ if($result->num_rows > 0){
             </div>
         </div>
     </div>
+    <!--== Scroll Top Button / Side Menu ==-->
+  <?php include '../commonsPhp/topButton_sideMenu.php'?>
+  <!--== End Scroll Top Button / Side Menu ==--> 
 </div>
 </body>
 </html>
@@ -120,7 +123,7 @@ if($result->num_rows > 0){
 <!--=== jQuery Migration Min Js ===-->
 <script src="../assets/js/jquery-migrate.js"></script>
 <!--=== Popper Min Js ===-->
-<script src=../assets/js/popper.min.js"></script>
+<script src="../assets/js/popper.min.js"></script>
 <!--=== Bootstrap Min Js ===-->
 <script src="../assets/js/bootstrap.min.js"></script>
 <!--=== jquery UI Min Js ===-->

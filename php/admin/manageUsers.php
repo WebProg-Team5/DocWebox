@@ -147,11 +147,11 @@ if($result->num_rows > 0){
                                     <td>{$value['id']}</td>
                                     <td>{$value['username']}</td>
                                     <td>
-                                        <a href='../doctor/myProfile.php?id={$value['id']}' type='button' class='btn btn-outline-primary'>Edit Profile</a> 
+                                        <a href='../doctor/myProfile.php?id={$value['id']}' type='button' class='btn btn-primary'>Edit Profile</a> 
                                         <form method='post' action='/admin/manageUsers.php'>
                                             <input type='hidden' name='table' value=doctors>
                                             <input type='hidden' name='id' value={$value['id']}>
-                                            <input type='submit' value='Delete doctor' class='btn btn-danger'>
+                                            <input type='submit' value='Delete doctor' class='btn btn-danger mt-3'>
                                         </form>                        
                                     </td>
                                 </tr>
@@ -201,6 +201,9 @@ if($result->num_rows > 0){
             </div>
         </div>
     </div>
+    <!--== Scroll Top Button / Side Menu ==-->
+  <?php include '../commonsPhp/topButton_sideMenu.php'?>
+  <!--== End Scroll Top Button / Side Menu ==-->    
 </div>
 </body>
 </html>

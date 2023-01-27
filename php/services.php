@@ -183,7 +183,8 @@
     <!--== End Testimonial Area Wrapper ==-->
 
     <!--== Start Divider Area Wrapper ==-->
-    <section class="divider-area bgcolor-theme bg-img" data-bg-img="assets/img/shape/01.jpg">
+    <?php if($_SESSION['type'] == 'patient'){
+      echo  '<section class="divider-area bgcolor-theme bg-img" data-bg-img="assets/img/shape/01.jpg">
       <div class="container">
         <div class="row content-align-center">
           <div class="col-lg-12">
@@ -197,7 +198,9 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>';
+    }
+    ?>
     <!--== End Divider Area Wrapper ==-->
   </main>
 

@@ -103,11 +103,11 @@ if($result->num_rows > 0){
                                 <td>{$value['date']}</td>
                                 <td>{$confirmation}</td>
                                 <td>
-                                    <a href='../doctor/myProfile.php?id={$value['doctorID']}' type='button' class='btn btn-outline-primary'>Go to Profile</a>
+                                    <a href='../doctor/myProfile.php?id={$value['doctorID']}' type='button' class='btn btn-primary'>Go to Profile</a>
                                     <form method='post' action='/patient/myAppointments.php'>
                                       <input type='hidden' name='id' value={$value['id']}>
                                       <input type='hidden' name='next' value='../doctor/myProfile.php?id={$value['doctorID']}'>
-                                      <input type='submit' value='Change Date' class='btn btn-warning'>
+                                      <input type='submit' value='Change Date' class='btn btn-warning mt-3'>
                                     </form>
                                     <form method='post' action='/patient/myAppointments.php'>
                                       <input type='hidden' name='id' value={$value['id']}>
@@ -131,7 +131,10 @@ if($result->num_rows > 0){
             </div>
         </div>
     </div>
-</div>
+
+<!--== Scroll Top Button / Side Menu ==-->
+<?php include '../commonsPhp/topButton_sideMenu.php'?>
+<!--== End Scroll Top Button / Side Menu ==--> </div>
 </body>
 </html>
 

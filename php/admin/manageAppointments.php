@@ -43,10 +43,7 @@ if($result->num_rows > 0){
     <link rel="icon" type="image/png" sizes="32x32" href="assets\img\icons\favicon-16x16.png">
     <!--== Main Style CSS ==-->
     <link href="../assets/css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
 </head>
 <body>
 <div>
@@ -182,7 +179,7 @@ if($result->num_rows > 0){
                                 <form method='post' action='manageAppointments.php'>
                                   <input type='hidden' id='operation' name='operation' value=edit>
                                   <input type='hidden' name='id' value={$value['id']}>
-                                  <input type='submit' value='Change Date' class='btn btn-warning'>
+                                  <input type='submit' value='Change Date' class='btn btn-warning mt-3'>
                                 </form>
                                 <form method='post' action='manageAppointments.php'>
                                   <input type='hidden' id='operation' name='operation' value=delete>
@@ -198,11 +195,17 @@ if($result->num_rows > 0){
             </div>
         </div>
     </div>
+        <!--== Scroll Top Button / Side Menu ==-->
+  <?php include '../commonsPhp/topButton_sideMenu.php'?>
+  <!--== End Scroll Top Button / Side Menu ==-->     
 </div>
 </body>
 </html>
 
 <!--=======================Javascript============================-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <!--=== Modernizr Min Js ===-->
 <script src="../assets/js/modernizr.js"></script>
 <!--=== jQuery Min Js ===-->
@@ -210,7 +213,7 @@ if($result->num_rows > 0){
 <!--=== jQuery Migration Min Js ===-->
 <script src="../assets/js/jquery-migrate.js"></script>
 <!--=== Popper Min Js ===-->
-<script src=../assets/js/popper.min.js"></script>
+<script src="../assets/js/popper.min.js"></script>
 <!--=== Bootstrap Min Js ===-->
 <script src="../assets/js/bootstrap.min.js"></script>
 <!--=== jquery UI Min Js ===-->

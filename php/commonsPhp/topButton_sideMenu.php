@@ -10,7 +10,7 @@
       <!-- Off Canvas Header -->
       <div class="off-canvas-header">
         <div class="logo-area">
-          <a href="index.php"><img src="assets/img/logo.png" alt="Logo" /></a>
+          <a href="index.php">DocWebox</a>
         </div>
         <div class="close-action">
           <button class="btn-close"><i class="lnr lnr-cross"></i></button>

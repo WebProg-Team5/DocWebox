@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
    $query = "INSERT INTO appointments (id, date, confirmed, patientID, doctorID) VALUES (NULL, '$date', '$confirmed', '$patientId', '$doctorId');";
    $result = mysqli_query($conn , $query);
    if(mysqli_affected_rows($conn) > 0){
-      echo "<b class='h4 text-success'>Appointment Set Successfully</b>";
+      echo "<b class='h3 text-success'>Appointment Set Successfully</b>";
    }
 
 }

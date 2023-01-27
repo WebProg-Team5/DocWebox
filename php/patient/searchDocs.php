@@ -141,13 +141,33 @@
 
         </div>
         
-        <div class="container col-sm-12  mx-auto mt-4" id="result">    
+        <div class="container col-sm-12  col-lg-10 mx-auto mt-4" id="result">    
         </div>
 	</div>
 </div>
-</div>
+<!--== Scroll Top Button / Side Menu ==-->
+<?php include '../commonsPhp/topButton_sideMenu.php'?>
+<!--== End Scroll Top Button / Side Menu ==--> </div>
 </body>
 </html>
+  <!--=======================Javascript============================-->
+  <!--=== Modernizr Min Js ===-->
+  <script src="../assets/js/modernizr.js"></script>
+  <!--=== jQuery Min Js ===-->
+  <script src="../assets/js/jquery-main.js"></script>
+  <!--=== jQuery Migration Min Js ===-->
+  <script src="../assets/js/jquery-migrate.js"></script>
+  <!--=== Popper Min Js ===-->
+  <script src="../assets/js/popper.min.js"></script>
+  <!--=== Bootstrap Min Js ===-->
+  <script src="../assets/js/bootstrap.min.js"></script>
+  <!--=== jquery UI Min Js ===-->
+  <script src="../assets/js/jquery-ui.min.js"></script>
+  <!--=== Plugin Collection Js ===-->
+  <script src="../assets/js/plugincollection.js"></script>
+  <!--=== Custom Js ===-->
+  <script src="../assets/js/custom.js"></script>
+  <!--=======================Javascript============================-->
 
 <script>
     $('#name').on("keyup",
