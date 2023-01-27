@@ -177,11 +177,6 @@ if($result->num_rows > 0){
                             <td>
                                 $confirmation
                                 <form method='post' action='manageAppointments.php'>
-                                  <input type='hidden' id='operation' name='operation' value=edit>
-                                  <input type='hidden' name='id' value={$value['id']}>
-                                  <input type='submit' value='Change Date' class='btn btn-warning mt-3'>
-                                </form>
-                                <form method='post' action='manageAppointments.php'>
                                   <input type='hidden' id='operation' name='operation' value=delete>
                                   <input type='hidden' name='id' value={$value['id']}>
                                   <input type='submit' value='Delete' class='btn btn-danger'>
