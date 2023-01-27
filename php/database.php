@@ -64,8 +64,8 @@ function createSchema($pdo) {
         confirmed BOOLEAN DEFAULT FALSE,
         patientID INT NOT NULL,
         doctorID INT NOT NULL,
-        FOREIGN KEY (patientID) REFERENCES patients(id),
-        FOREIGN KEY (doctorID) REFERENCES doctors(id)
+        FOREIGN KEY (patientID) REFERENCES patients(id) ON DELETE CASCADE,
+        FOREIGN KEY (doctorID) REFERENCES doctors(id) ON DELETE CASCADE
       );
 
       CREATE TABLE IF NOT EXISTS reviews (
@@ -75,8 +75,8 @@ function createSchema($pdo) {
         rating INT,
         patientID INT NOT NULL,
         doctorID INT NOT NULL,
-        FOREIGN KEY (patientID) REFERENCES patients(id),
-        FOREIGN KEY (doctorID) REFERENCES doctors(id)
+        FOREIGN KEY (patientID) REFERENCES patients(id) ON DELETE CASCADE,
+        FOREIGN KEY (doctorID) REFERENCES doctors(id) ON DELETE CASCADE
       );
 
       CREATE VIEW IF NOT EXISTS users AS

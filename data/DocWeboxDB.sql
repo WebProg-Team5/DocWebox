@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Jan 26, 2023 at 01:08 AM
+-- Generation Time: Jan 27, 2023 at 01:39 AM
 -- Server version: 10.8.3-MariaDB-1:10.8.3+maria~jammy
 -- PHP Version: 8.0.27
 
@@ -638,8 +638,8 @@ CREATE VIEW `rankedDoctors`  AS SELECT `d`.`id` AS `id`, `d`.`username` AS `user
 --
 DROP TABLE IF EXISTS `users`;
 
-CREATE  VIEW `users`  AS SELECT `patients`.`id` AS `id`, `patients`.`username` AS `username`, `patients`.`email` AS `email`, `patients`.`password` AS `password`, 'patient' AS `type` FROM `patients` union all select `doctors`.`id` AS `id`,`doctors`.`username` AS `username`,`doctors`.`email` AS `email`,`doctors`.`password` AS `password`,'doctor' AS `type` from `doctors` union all select `admins`.`id` AS `id`,`admins`.`username` AS `username`,`admins`.`email` AS `email`,`admins`.`password` AS `password`,'admin' AS `type` from `admins`  ;
--- ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER
+CREATE VIEW `users`  AS SELECT `patients`.`id` AS `id`, `patients`.`username` AS `username`, `patients`.`email` AS `email`, `patients`.`password` AS `password`, 'patient' AS `type` FROM `patients` union all select `doctors`.`id` AS `id`,`doctors`.`username` AS `username`,`doctors`.`email` AS `email`,`doctors`.`password` AS `password`,'doctor' AS `type` from `doctors` union all select `admins`.`id` AS `id`,`admins`.`username` AS `username`,`admins`.`email` AS `email`,`admins`.`password` AS `password`,'admin' AS `type` from `admins`  ;
+
 --
 -- Indexes for dumped tables
 --
@@ -723,15 +723,15 @@ ALTER TABLE `reviews`
 -- Constraints for table `appointments`
 --
 ALTER TABLE `appointments`
-  ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patients` (`id`),
-  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`doctorID`) REFERENCES `doctors` (`id`);
+  ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patients` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`doctorID`) REFERENCES `doctors` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `reviews`
 --
 ALTER TABLE `reviews`
-  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patients` (`id`),
-  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`doctorID`) REFERENCES `doctors` (`id`);
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patients` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`doctorID`) REFERENCES `doctors` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
