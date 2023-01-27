@@ -42,7 +42,7 @@ if($result->num_rows > 0){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">    
-
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
     .focused { background: #E0F8E0 !important;}
 
@@ -211,7 +211,17 @@ if($result->num_rows > 0){
                                 </tr>
                                 <tr>
                                     <th scope="row">Ratings</th>
-                                    <td id="ratings" class='editable'><?php echo $rating?></td>
+                                    <td id="ratings" class='editable'>
+                                    <?php 
+                                    $rate5 = $rating;
+                                    $starRate = "";
+                                
+                                    $starRate = str_repeat('<i class="fa fa-star" aria-hidden="true"></i>', floor($rate5));
+
+                                    if($rate5 !== floor($rate5)){
+                                        $starRate .= '<i class="fa fa-star-half-o" aria-hidden="true"></i>';
+                                    }
+                                    echo $starRate?></td>
                                 </tr>
                             </table>
                         </div>
@@ -251,7 +261,7 @@ if($result->num_rows > 0){
                             if ($reviewCount>0) {
                                 foreach ($reviews as $key => $value) {
                                     $avgRating = $value['rating'];
-                                    $rate5 = round($avgRating) / 2; //4.5
+                                    $rate5 = round($avgRating) / 2;
                                     $starRate = "";
                                 
                                     $starRate = str_repeat('<i class="fa fa-star" aria-hidden="true"></i>', floor($rate5));
@@ -263,7 +273,7 @@ if($result->num_rows > 0){
                                     <tr>
                                     <td>{$value['name']}</td>
                                     <td>{$value['date']}</td>
-                                    <td>.$starRate.</td>
+                                    <td>$starRate</td>
                                     <td>{$value['content']}</td>
                                     </tr>
                                 ";
