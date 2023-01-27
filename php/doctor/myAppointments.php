@@ -89,6 +89,7 @@ if($result->num_rows > 0){
                             <th>Confirmation</th>
                         </tr>
                         <?php
+                        if (isset($appointments)) {
                         foreach ($appointments as $value) {
                             $form = "<form method='post'' action='myAppointments.php'>
                                         <input type='hidden' id='id' name='id' value={$value['id']}>
@@ -102,6 +103,7 @@ if($result->num_rows > 0){
                             <td>{$confirmation}</td>
                             </tr>
                         ";
+                        }
                         }
                         ?>
                 </div>
