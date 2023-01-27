@@ -53,7 +53,7 @@ if($result->num_rows > 0){
                                                 <li id="myProfiel"><a href="myProfile.php?id='.$_SESSION['id'].'">My Profile</a></li>';
                                     } else if($_SESSION['type'] === 'admin'){
                                         echo '<li id="mngAppointments"><a href="manageAppointments.php">Manage Appointments</a></li>
-                                                <li id="mngDocs"><a href="manageDoctors.php">Manage Doctors</a></li>';
+                                                <li id="mngDocs"><a href="manageUsers.php">Manage Users</a></li>';
                                     }
                                     ?>
 

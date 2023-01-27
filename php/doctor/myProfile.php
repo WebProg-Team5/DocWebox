@@ -127,8 +127,8 @@ if($result->num_rows > 0){
                             echo '<li id="myAppointments"><a href="myAppointments.php">My Appointments</a></li>
                                 <li id="myProfiel"><a href="myProfile.php?id='.$_SESSION['id'].'">My Profile</a></li>';
                         } else if($_SESSION['type'] === 'admin'){
-                            '<li id="mngAppointments"><a href="admin/manageAppointments.php">Manage Appointments</a></li>
-                                <li id="mngDocs"><a href="admin/manageDoctors.php">Manage Doctors</a></li>';
+                            echo '<li id="mngAppointments"><a href="../admin/manageAppointments.php">Manage Appointments</a></li>
+                                <li id="mngDocs"><a href="../admin/manageUsers.php">Manage Users</a></li>';
                         }
                         ?>
                         
@@ -163,7 +163,7 @@ if($result->num_rows > 0){
 
             <?php if( ($_SESSION['type'] == "doctor" && $_SESSION['id'] == $id ) || $_SESSION['type'] == "admin") {
                 echo '<input id="avatarInput" class="form-control form-control-sm mt-3 mb-3 col-sm-6 mx-auto" type="file" id="formFile" style="display: none">';
-                echo "<button id='edit' name='edit' class='btn btn-lg btn-danger mt-4'>Edit Your Profile</button>
+                echo "<button id='edit' name='edit' class='btn btn-lg btn-danger mt-4'>Edit Profile</button>
                       <button id='save' name='save' class='btn btn-lg btn-success mt-4' style='display: none'>Save Changes</button>
                       <button id='cancel' name='cancel' class='btn btn-lg btn-danger mt-4' style='display: none'>Cancel Changes</button>";
                 echo '<div id="result" class="mt-5">

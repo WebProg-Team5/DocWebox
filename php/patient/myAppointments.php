@@ -57,7 +57,7 @@ if($result->num_rows > 0){
                                                 <li id="myProfiel"><a href="myProfile.php?id='.$_SESSION['id'].'">My Profile</a></li>';
                                     } else if($_SESSION['type'] === 'admin'){
                                         '<li id="mngAppointments"><a href="admin/manageAppointments.php">Manage Appointments</a></li>
-                                         <li id="mngDocs"><a href="admin/manageDoctors.php">Manage Doctors</a></li>';
+                                         <li id="mngDocs"><a href="admin/manageUsers.php">Manage Doctors</a></li>';
                                     }
                                     ?>
 
