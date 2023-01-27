@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
     // var_dump($name, $location, $insurance, $specialisation);
 
-    $query = "SELECT * FROM doctors WHERE 1=1";
+    $query = "SELECT * FROM rankedDoctors WHERE 1=1";
    
     if(!empty($name)){
         $query .= " AND name LIKE '%$name%'";
@@ -52,6 +52,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
         while($row1 = mysqli_fetch_array($result))
         {
+            $avgRating = $row1['rating'];
+            $rate5 = round($avgRating) / 2; //4.5
+            $starRate = "";
+           
+            $starRate = str_repeat('<i class="fa fa-star" aria-hidden="true"></i>', floor($rate5));
+
+            if($rate5 !== floor($rate5)){
+                $starRate .= '<i class="fa fa-star-half-o" aria-hidden="true"></i>';
+            }
+
             $return .= '
             <tr>
             <td><img src="' . $row1["avatarUrl"] . '" width="60px"></td>
@@ -59,7 +69,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             <td>'.$row1["specialisation"].'</td>
             <td>'.$row1["location"].'</td>
             <td>'.$row1["insurance"].'</td>
-            <td> </td>
+            <td>'.$starRate. '</td>
             <td>
             <a href="../doctor/myProfile.php?id='.$row1["id"] .'" type="button" class="btn btn-outline-danger">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">

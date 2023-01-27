@@ -20,13 +20,6 @@
       $available_Specs = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    //!!! SELECT THE 5 TOP RATED DOCTORS
-    // $query = "SELECT DISTINCT d.* FROM reviews as r JOIN doctors as d ON r.doctorID=d.id ORDER BY rating DESC LIMIT 5";
-    // $result = $conn->query($query);
-    // if($result->num_rows> 0){
-    //   $bestDoctors = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    // }
-
 ?>
 
 <html>
@@ -38,6 +31,7 @@
     <meta name="description" content="DocWebox"/>
     <link rel="icon" type="image/png" sizes="32x32" href="assets\img\icons\favicon-16x16.png">
     <!--== Main Style CSS ==-->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

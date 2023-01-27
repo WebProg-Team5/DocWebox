@@ -10,10 +10,9 @@
         $username = mysqli_real_escape_string($conn, $_POST['username']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-        // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-        //!!! CHANGE TABLE TO USERS
         $sql = 'SELECT * FROM users WHERE username = ? OR email = ?';
 
+        // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param('ss', $username, $username);
         $stmt->execute();

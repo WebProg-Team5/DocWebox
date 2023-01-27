@@ -237,28 +237,6 @@ if($result->num_rows > 0){
                             </table>
                         </div>
                     </div>
-
-                    <!-- STAR RATING AS A PATIENT -->
-                    <h3 class="mt-3">Reviews (<?php echo $reviewCount?> Found)</h3>
-                    <?php if($_SESSION['type'] == "patient"){
-                        echo 
-                        '<div class="stars">
-                            <form action="" >
-                            <h3 class="mt-3">Rate Doctor</h3>
-                            <input class="star star-5" id="star-5" type="radio" name="star"/>
-                            <label class="star star-5" for="star-5"></label>
-                            <input class="star star-4" id="star-4" type="radio" name="star"/>
-                            <label class="star star-4" for="star-4"></label>
-                            <input class="star star-3" id="star-3" type="radio" name="star"/>
-                            <label class="star star-3" for="star-3"></label>
-                            <input class="star star-2" id="star-2" type="radio" name="star"/>
-                            <label class="star star-2" for="star-2"></label>
-                            <input class="star star-1" id="star-1" type="radio" name="star"/>
-                            <label class="star star-1" for="star-1"></label>
-                            </form> 
-                        </div>';
-                    }
-                    ?>
                     
                     <!-- REVIEWS -->
                     <div class="table-responsive mb-5">
@@ -272,12 +250,20 @@ if($result->num_rows > 0){
                         <?php
                             if ($reviewCount>0) {
                                 foreach ($reviews as $key => $value) {
-                                    $rating = $value['rating']/2;
+                                    $avgRating = $value['rating'];
+                                    $rate5 = round($avgRating) / 2; //4.5
+                                    $starRate = "";
+                                
+                                    $starRate = str_repeat('<i class="fa fa-star" aria-hidden="true"></i>', floor($rate5));
+
+                                    if($rate5 !== floor($rate5)){
+                                        $starRate .= '<i class="fa fa-star-half-o" aria-hidden="true"></i>';
+                                    }
                                     echo "
                                     <tr>
                                     <td>{$value['name']}</td>
                                     <td>{$value['date']}</td>
-                                    <td>{$rating} stars</td>
+                                    <td>.$starRate.</td>
                                     <td>{$value['content']}</td>
                                     </tr>
                                 ";
