@@ -86,30 +86,30 @@ if($result->num_rows > 0){
             <div class="col-sm-12 col-md-10 col-lg-8 mx-auto mt-4">
 
                 <div class="table-responsive  table-sm mb-5">
-                    <table class="table table-hover table-bordered">
-                        <tr>
-                            <th>Doctor Name</th>
-                            <th>Date</th>
-                            <th>Confirmation</th>
-                            <th></th>
-                        </tr>
                         <?php
                         if(isset($appointments) ){
                             foreach ($appointments as $value) {
                                 $confirmation = $value["confirmed"] ? "Confirmed" : "Awaiting Confirmation";
                                 echo "
+                                <table class='table table-hover table-bordered'>
+                                <tr>
+                                    <th>Doctor Name</th>
+                                    <th>Date</th>
+                                    <th>Confirmation</th>
+                                    <th></th>
+                                </tr>
                                 <tr>
                                 <td>{$value['name']}</td>
                                 <td>{$value['date']}</td>
                                 <td>{$confirmation}</td>
                                 <td>
                                     <a href='../doctor/myProfile.php?id={$value['doctorID']}' type='button' class='btn btn-primary'>Go to Profile</a>
-                                    <form method='post' action='/patient/myAppointments.php'>
+                                    <form method='post' action=''>
                                       <input type='hidden' name='id' value={$value['id']}>
                                       <input type='hidden' name='next' value='../doctor/myProfile.php?id={$value['doctorID']}'>
-                                      <input type='submit' value='Change Date' class='btn btn-warning mt-3'>
+                                      <input type='submit' value='Re-Schedule' class='btn btn-warning mt-3'>
                                     </form>
-                                    <form method='post' action='/patient/myAppointments.php'>
+                                    <form method='post' action=''>
                                       <input type='hidden' name='id' value={$value['id']}>
                                       <input type='submit' value='Delete' class='btn btn-danger'>
                                     </form>

@@ -5,7 +5,6 @@ include '../connect.php';
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $id = mysqli_real_escape_string($conn, $_POST["id"]);;
-    $avatarUrl = mysqli_real_escape_string($conn, $_POST['avatarUrl']);
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $insurance = mysqli_real_escape_string($conn, $_POST['insurance']);
     $specialisation = mysqli_real_escape_string($conn, $_POST['specialisation']);
@@ -16,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
     $location = mysqli_real_escape_string($conn, $_POST['location']);;
 
-    $query = "UPDATE doctors SET name='$name' , email='$email', avatarUrl='$avatarUrl', phone='$phone',
+    $query = "UPDATE doctors SET name='$name' , email='$email', phone='$phone',
     location='$location', insurance='$insurance', specialisation='$specialisation', price='$price',
     description='$description' WHERE id = '$id' ";
 

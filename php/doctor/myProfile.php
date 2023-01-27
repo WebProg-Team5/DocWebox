@@ -44,7 +44,7 @@ if($result->num_rows > 0){
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">    
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-    .focused { background: #E0F8E0 !important;}
+        .focused { background: #E0F8E0 !important;}
 
 
         div.stars {
@@ -155,19 +155,20 @@ if($result->num_rows > 0){
             </div>
         </header>
 
-        <div class="container-fluid text-center mt-5">
+        <div class="container text-center mt-5">
             <?php
-                echo "<img id='avatar' src={$doctor["avatarUrl"]} alt='Doctor Avatar'>";
-                echo "<input hidden id='doctorId' value='".$_GET["id"]."'>";
+                echo "<img id='avatar' class='row mx-auto'src={$doctor["avatarUrl"]} alt='Doctor Avatar'>";
+                echo "<input hidden id='doctorId' class='form-control' value='".$_GET["id"]."'>";
                 echo "<input hidden id='patientId' value='".$_SESSION["id"]."'>";
-                echo "<h3 id='doctorName'class='editable text-secondary m-4'>{$doctor['name']}</h3>";
+                echo "<div class='text-center'>
+                <h3 id='doctorName'class='editable text-secondary m-4 mx-auto'>{$doctor['name']}</h3>";
             ?>
 
             <?php if( ($_SESSION['type'] == "doctor" && $_SESSION['id'] == $id ) || $_SESSION['type'] == "admin") {
-                echo '<input id="avatarInput" class="form-control form-control-sm mt-3 mb-3 col-sm-6 mx-auto" type="file" id="formFile" style="display: none">';
                 echo "<button id='edit' name='edit' class='btn btn-lg btn-danger mt-4'>Edit Profile</button>
-                      <button id='save' name='save' class='btn btn-lg btn-success mt-4' style='display: none'>Save Changes</button>
-                      <button id='cancel' name='cancel' class='btn btn-lg btn-danger mt-4' style='display: none'>Cancel Changes</button>";
+                      <button id='save' name='save' class='btn-block btn-lg btn-success mt-4' style='display: none'>Save Changes</button>
+                      <button id='cancel' name='cancel' class='btn-block btn-lg btn-danger mt-4' style='display: none'>Cancel Changes</button>
+                </div>";
                 echo '<div id="result" class="mt-5">
                       </div>';
             }
@@ -193,7 +194,7 @@ if($result->num_rows > 0){
                 </div>';
                 } ?>
 
-                <div class="container mx-auto mt-4">
+                <div class="container col-lg-12 mx-auto mt-4">
                     <div class="row mt-5">
                         <div class="table-responsive table-sm">
                             <table class="table table-bordered">
@@ -359,7 +360,7 @@ if($result->num_rows > 0){
                 $(this).prop('disabled', false);
             }
             if($(this).is("h3")){
-                var input = $('<input id="fullName" class="editable form-control mt-5 mb-5 col-sm-6 mx-auto" />').val($(this).text());
+                var input = $('<input id="fullName" class="editable form-control mt-5 mb-5 mx-auto text-center" />').val($(this).text());
                 $(this).replaceWith(input);
             }
             $(this).attr('editing', 1);
@@ -388,7 +389,7 @@ if($result->num_rows > 0){
                 $(this).prop('disabled', true);
             }
             if($(this).is("input")){
-                let h3 = $("<h3 id='doctorName'class='editable text-secondary m-4'>{$doctor['name']}</h3>").text($(this).val());
+                let h3 = $("<h3 id='doctorName'class='form-control editable text-secondary m-4 '>{$doctor['name']}</h3>").text($(this).val());
                 $(this).replaceWith(h3);
                 key = "name";
                 value = $(this).val();
