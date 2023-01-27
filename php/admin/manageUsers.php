@@ -81,7 +81,7 @@ if($result->num_rows > 0){
                             </div>
                             <div class="header-action-area">
                                 <div class="login-reg">
-                                    <a href=""><?php echo $_SESSION['username']?></a><span>/</span><a href="../logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
+                                 <a disabled><?php echo $_SESSION['username']?></a><span>/</span><a href="../logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
                                 </div>
                                 <button class="btn-menu d-lg-none">
                                     <span></span>
@@ -115,7 +115,7 @@ if($result->num_rows > 0){
                                     <td>{$value['id']}</td>
                                     <td>{$value['username']}</td>
                                     <td>
-                                        <form method='post' action='/admin/manageUsers.php'>
+                                        <form method='post' action=''>
                                             <input type='hidden' name='table' value=admins>
                                             <input type='hidden' name='id' value={$value['id']}>
                                             <input type='submit' value='Delete admin' class='btn btn-danger'>
@@ -148,7 +148,7 @@ if($result->num_rows > 0){
                                     <td>{$value['username']}</td>
                                     <td>
                                         <a href='../doctor/myProfile.php?id={$value['id']}' type='button' class='btn btn-primary'>Edit Profile</a> 
-                                        <form method='post' action='/admin/manageUsers.php'>
+                                        <form method='post' action=''>
                                             <input type='hidden' name='table' value=doctors>
                                             <input type='hidden' name='id' value={$value['id']}>
                                             <input type='submit' value='Delete doctor' class='btn btn-danger mt-3'>
@@ -180,11 +180,11 @@ if($result->num_rows > 0){
                                     <td>{$value['id']}</td>
                                     <td>{$value['username']}</td>
                                     <td>
-                                        <form method='post' action='/admin/manageUsers.php'>
+                                        <form method='post' action=''>
                                             <input type='hidden' name='id' value={$value['id']}>
                                             <input type='submit' value='Set to Doctor' class='btn btn-warning'>
                                         </form>
-                                        <form method='post' action='/admin/manageUsers.php'>
+                                        <form method='post' action=''>
                                             <input type='hidden' name='table' value=patients>
                                             <input type='hidden' name='id' value={$value['id']}>
                                             <input type='submit' value='Delete patient' class='btn btn-danger'>

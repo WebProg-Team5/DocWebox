@@ -166,7 +166,7 @@ if($result->num_rows > 0){
 
             <?php if( ($_SESSION['type'] == "doctor" && $_SESSION['id'] == $id ) || $_SESSION['type'] == "admin") {
                 echo "<button id='edit' name='edit' class='btn btn-lg btn-danger mt-4'>Edit Profile</button>
-                      <button id='save' name='save' class='btn-block btn-lg btn-success mt-4' style='display: none'>Save Changes</button>
+                      <button id='save' name='save' class='btn-block btn-lg btn-success mt-5' style='display: none'>Save Changes</button>
                       <button id='cancel' name='cancel' class='btn-block btn-lg btn-danger mt-4' style='display: none'>Cancel Changes</button>
                 </div>";
                 echo '<div id="result" class="mt-5">
@@ -362,6 +362,9 @@ if($result->num_rows > 0){
             if($(this).is("h3")){
                 var input = $('<input id="fullName" class="editable form-control mt-5 mb-5 mx-auto text-center" />').val($(this).text());
                 $(this).replaceWith(input);
+            }
+            if($(this).attr("id") == "ratings"){
+                $(this).prop('contenteditable', false); 
             }
             $(this).attr('editing', 1);
         });

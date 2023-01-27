@@ -78,7 +78,7 @@ if($result->num_rows > 0){
                             </div>
                             <div class="header-action-area">
                                 <div class="login-reg">
-                                    <a href=""><?php echo $_SESSION['username']?></a><span>/</span><a href="../logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
+                                    <a disabled><?php echo $_SESSION['username']?></a><span>/</span><a href="../logout.php">logout</a> <i class="icon icofont-user-alt-3"></i>
                                 </div>
                                 <button class="btn-menu d-lg-none">
                                     <span></span>
@@ -166,9 +166,9 @@ if($result->num_rows > 0){
                             $form = "<form method='post' action='manageAppointments.php'>
                                         <input type='hidden' id='operation' name='operation' value=confirm>
                                         <input type='hidden' id='id' name='id' value={$value['id']}>
-                                        <input type='submit' class='btn btn-outline-primary' name='' value='Confirm'>
+                                        <input type='submit' class='btn btn-primary' name='' value='Confirm'>
                                      </form>";
-                            $confirmation = $value["confirmed"] ? "<button type='button' class='btn btn-outline-dark' disabled>Confirmed</button>" : $form;
+                            $confirmation = $value["confirmed"] ? "<button type='button' class='btn btn-success' disabled>Confirmed</button>" : $form;
                             echo "
                             <tr>
                             <td>{$value['pName']}</td>
